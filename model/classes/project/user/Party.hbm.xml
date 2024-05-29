@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.user.Party" table="T_PARTY">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="enabled" type="yes_no">
+			<column name="ENABLED" />
+		</property>
+		<property name="activation" type="yes_no">
+			<column name="ACTIVATION" />
+		</property>
+		<property name="cash" type="yes_no">
+			<column name="CASH" />
+		</property>
+		<property name="inuser" type="yes_no">
+			<column name="INUSER" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		
+		<property name="userType" type="java.lang.String">
+			<column name="PARTY_TYPE" />
+		</property>
+		
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		
+		<property name="source" type="java.lang.String">
+			<column name="SOURCE" />
+		</property>
+		
+		<property name="recoNum" type="int">
+			<column name="RECONUM" />
+		</property>
+		
+		<property name="networkNum" type="int">
+			<column name="NETWORKNUM" />
+		</property>
+		
+		<property name="sales" type="double">
+			<column name="SALES" />
+		</property>
+		
+		<property name="state" type="int">
+			<column name="STATE" />
+		</property>
+		
+		<property name="networksales" type="double">
+			<column name="NETWORKSALES" />
+		</property>
+		
+		<property name="recosales" type="double">
+			<column name="RECOSALES" />
+		</property>
+			<property name="cashToAccount" type="double">
+			<column name="CASHTOACCOUNT" />
+		</property>
+			<property name="networkCashToAccount" type="double">
+			<column name="NETWORKCASHTOACCOUNT" />
+		</property>
+		
+		<property name="productId" type="int">
+			<column name="PRODUCTID" />
+		</property>
+		<property name="tenantName" type="java.lang.String">
+			<column name="TENANT_NAME" />
+		</property>
+			<property name="zhituibounslevel" type="int">
+			<column name="ZHITUIBOUNSLEVEL" />
+		</property>
+			<property name="leaderbounslevel" type="int">
+			<column name="LEADERBOUNSLEVEL" />
+		</property>
+			<property name="teambounslevel" type="int">
+			<column name="TEAMBOUNSLEVEL" />
+		</property>
+			<property name="zlbounslevel" type="int">
+			<column name="ZLBOUNSLEVEL" />
+		</property>
+		<property name="fbounslevel" type="int">
+			<column name="FBOUNSLEVEL" />
+		</property>
+		<property name="recosalesZ" type="double">
+			<column name="RECOSALESZ" />
+		</property>
+			<property name="salesZ" type="double">
+			<column name="SALESZ" />
+		</property>
+		<property name="registerId" type="java.lang.String">
+			<column name="REGISTERID" />
+		</property>
+		<property name="updateAccname" type="yes_no">
+			<column name="UPDATEACCNAME" />
+		</property>
+		<property name="wid" type="java.lang.String">
+			<column name="WID" />
+		</property>
+			<property name="ip" type="java.lang.String">
+			<column name="IP" />
+		</property>
+	</class>
+</hibernate-mapping>

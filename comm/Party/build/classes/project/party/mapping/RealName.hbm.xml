@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.party.RealName" table="PAT_REALNAME">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="IDNumber" type="java.lang.String">
+			<column name="IDNUMBER" />
+		</property>
+			<property name="IDType" type="int">
+			<column name="IDTYPE" />
+		</property>
+	</class>
+</hibernate-mapping>

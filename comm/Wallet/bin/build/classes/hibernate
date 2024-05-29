@@ -1,0 +1,14 @@
+#admin
+
+<!-- wallet -->
+<value>adminWithdrawOrderService</value>
+<value>adminRechargeOrderService</value>
+
+#ROOT
+<!-- wallet -->
+<value>walletService</value>
+<value>rechargeOrderService</value>
+<value>fhtotoRechargeService</value>
+<value>fhtotoQueryService</value>
+<value>tftRechargeService</value>
+<value>tftQueryService</value>

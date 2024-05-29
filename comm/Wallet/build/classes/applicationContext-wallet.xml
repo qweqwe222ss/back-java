@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans         
+	    http://www.springframework.org/schema/beans/spring-beans.xsd         
+	    http://code.alibabatech.com/schema/dubbo         
+	    http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+	
+	
+	<bean id="walletService" class="project.wallet.internal.WalletServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<dubbo:service interface="project.wallet.WalletService" ref="walletService"/>
+	<!-- userDataService在产品实现 -->
+	<bean id="rechargeOrderService" class="project.wallet.recharge.internal.RechargeOrderServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="pagedDao" ref="pagedDao" />
+		<property name="walletService" ref="walletService" />
+		<property name="walletUserDataService" ref="userDataService" />
+	</bean>
+	
+	<dubbo:service interface="project.wallet.recharge.RechargeOrderService" ref="rechargeOrderService"/>
+	
+	<bean id="fhtotoRechargeService" class="project.wallet.recharge.fhtoto.FhtotoRechargeServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="rechargeOrderService" ref="rechargeOrderService" />
+	</bean>
+	
+	<bean id="fhtotoQueryService" class="project.wallet.recharge.fhtoto.FhtotoQueryServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="rechargeOrderService" ref="rechargeOrderService" />
+	</bean>
+	
+	<!--  -->
+	<bean id="tftRechargeService" class="project.wallet.recharge.tft.TftRechargeServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="rechargeOrderService" ref="rechargeOrderService" />
+		<property name="partyService" ref="partyService" />
+	</bean>
+	
+	<bean id="tftQueryService" class="project.wallet.recharge.tft.TftQueryServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="tftRechargeService" ref="tftRechargeService" />
+	</bean>
+	
+	<bean id="rechargeQueryTask" class="project.wallet.recharge.task.QueryTask">
+		<property name="tftQueryService" ref="tftQueryService" />
+		<property name="rechargeOrderService" ref="rechargeOrderService" />
+	</bean>
+	
+	
+	<bean id="tftBackNotifyAction" class="project.wallet.recharge.tft.web.BackNotifyAction"
+		scope="prototype">
+		<property name="withdrawOrderService" ref="withdrawOrderService"/>
+	</bean>
+	
+	<bean id="tffOfflineWithdrawAction" class="project.wallet.withdraw.Offline.web.TffOfflineWithdrawAction"
+		scope="prototype">
+		<property name="offlineWithdrawService" ref="offlineWithdrawService"/>
+	</bean>
+	
+	<bean id="tffPreTradeAction" class="project.wallet.recharge.tft.web.PreTradeAction"
+		scope="prototype">
+		<property name="tftRechargeService" ref="tftRechargeService"/>
+		<property name="partyService" ref="partyService" />
+	</bean>
+	<bean id="tffWangGuanAction" class="project.wallet.recharge.tft.web.WangGuanAction"
+		scope="prototype">
+		<property name="tftRechargeService" ref="tftRechargeService"/>
+	</bean>
+	<bean id="tffSaoMaAction" class="project.wallet.recharge.tft.web.SaoMaAction"
+		scope="prototype">
+		<property name="tftRechargeService" ref="tftRechargeService"/>
+		<property name="twoDimensionCodeContentService" ref="twoDimensionCodeContentService"/>
+	</bean>
+	
+	<!-- userDataService在产品实现 -->
+	<dubbo:service interface="project.wallet.WalletUserDataService" ref="userDataService"/>
+
+</beans>

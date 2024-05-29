@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.wallet.withdraw.WithdrawOrder" table="T_WITHDRAW_ORDER">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			  <generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+
+		<property name="channel" column="CHANNEL" type="java.lang.String"></property>
+		
+		<property name="amount" type="double">
+			<column name="AMOUNT" />
+		</property>
+			<property name="bankCode" type="java.lang.String">
+			<column name="BANK_CODE" />
+		</property>
+			<property name="bankCardNo" type="java.lang.String">
+			<column name="BANK_CARD_NO" />
+		</property>
+			<property name="bankAccount" type="java.lang.String">
+			<column name="BANK_ACCOUNT" />
+		</property>
+		
+		<property name="currency" column="CURRENCY" type="java.lang.String"></property>
+	
+		<property name="orderNo" type="java.lang.String">
+			<column name="ORDER_NO" />
+		</property>
+		<property name="clientIp" type="java.lang.String">
+			<column name="CLIENT_IP" />
+		</property>
+
+		<property name="state" column="STATE" type="int"></property>
+
+		<property name="failureCode" type="java.lang.String">
+			<column name="FAILURE_CODE" />
+		</property>
+		<property name="failureMsg" type="java.lang.String">
+			<column name="FAILURE_MSG" />
+		</property>
+		
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="updateTime" type="timestamp">
+			<column name="UPDATE_TIME" />
+		</property>
+		<property name="iDNumber" type="java.lang.String">
+			<column name="IDNUMBER" />
+		</property>
+	</class>
+</hibernate-mapping>

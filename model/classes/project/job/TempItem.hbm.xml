@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.job.TempItem" table="T_TEMPITEM">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="item" type="java.lang.String">
+			<column name="ITEM" />
+		</property>
+		
+		<property name="jobDate" type="timestamp">
+			<column name="JOBDATE" />
+		</property>
+			<property name="type" type="int">
+			<column name="PTYPE" />
+		</property>
+	</class>
+</hibernate-mapping>

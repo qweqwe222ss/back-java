@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.mall.goods.model.SellerGoodsSku" table="T_MALL_SELLER_GOODS_SKU">
+
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+		</id>
+		<property name="sellerId" type="java.lang.String">
+			<column name="SELLER_ID" />
+		</property>
+		<property name="systemGoodsId" type="java.lang.String">
+			<column name="SYSTEM_GOODS_ID" />
+		</property>
+		<property name="sellerGoodsId" type="java.lang.String">
+			<column name="SELLER_GOODS_ID" />
+		</property>
+		<property name="categoryId" type="java.lang.String">
+			<column name="CATEGORY_ID" />
+		</property>
+		<property name="soldNum" type="java.lang.Integer">
+			<column name="SOLD_NUM" />
+		</property>
+		<property name="skuId" type="java.lang.String">
+			<column name="SKU_ID" />
+		</property>
+		<property name="systemPrice" type="double">
+			<column name="SYSTEM_PRICE" />
+		</property>
+		<property name="sellingPrice" type="double">
+			<column name="SELLING_PRICE" />
+		</property>
+		<property name="profitRatio" type="double">
+			<column name="PROFIT_RATIO" />
+		</property>
+		<property name="upTime" type="java.lang.Long">
+			<column name="UP_TIME" />
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="discountPrice" type="double">
+			<column name="DISCOUNT_PRICE" />
+		</property>
+		<property name="discountRatio" type="double">
+			<column name="DISCOUNT_RATIO" />
+		</property>
+		<property name="isDelete" type="java.lang.Integer">
+			<column name="IS_DELETE" />
+		</property>
+
+	</class>
+</hibernate-mapping>

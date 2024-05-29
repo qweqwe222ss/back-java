@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.mall.UserLogisticsInfo" table="T_USER_LOGISTICS_INFO">
+	<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+		<property name="tel" type="java.lang.String">
+			<column name="TEL" />
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="PHONE" />
+		</property>
+		<property name="receiverName" type="java.lang.String">
+			<column name="RECEIVER_NAME" />
+		</property>
+		<property name="postCode" type="java.lang.String">
+			<column name="POST_CODE" />
+		</property>
+		<property name="detailAddress" type="java.lang.String">
+			<column name="DETAIL_ADDRESS" />
+		</property>
+		<property name="defaultAddress" type="int">
+			<column name="DEFAULT_ADDRESS" />
+		</property>
+	</class>
+</hibernate-mapping>

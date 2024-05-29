@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.fund.VPice" table="T_VPICE">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="opening" type="double">
+			<column name="OPENING" />
+		</property>
+		<property name="closing" type="double">
+			<column name="CLOSING" />
+		</property>
+		<property name="ceiling" type="double">
+			<column name="CEILING" />
+		</property>
+		<property name="floor" type="double">
+			<column name="FLOOR" />
+		</property>
+			<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+	
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.wallet.recharge.fhtoto.FhtotoBackNotify" table="T_FHTOTO_BACKNOTIFY">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			  <generator class="uuid.hex" />
+		</id>
+		<property name="return_code" type="java.lang.String">
+			<column name="RETURN_CODE" />
+		</property>
+
+		<property name="return_msg" column="RETURN_MSG" type="java.lang.String"></property>
+		
+		<property name="result_code" type="java.lang.String">
+			<column name="RESULT_CODE" />
+		</property>
+		<property name="pay_type" column="PAY_TYPE" type="java.lang.String"></property>
+		
+		<property name="service_id" type="java.lang.String">
+			<column name="SERVICE_ID" />
+		</property>
+		<property name="userid" type="java.lang.String">
+			<column name="USERID" />
+		</property>
+		<property name="userpwd" type="java.lang.String">
+			<column name="USERPWD" />
+		</property>
+		<property name="terminal_time" type="java.lang.String">
+			<column name="TERMINAL_TIME" />
+		</property>
+		<property name="total_fee" type="java.lang.String">
+			<column name="TOTAL_FEE" />
+		</property>
+		<property name="end_time" column="END_TIME" type="java.lang.String"></property>
+	
+		
+		<property name="out_trade_no" type="java.lang.String">
+			<column name="OUT_TRADE_NO" />
+		</property>
+		<property name="channel_trade_no" type="java.lang.String">
+			<column name="CHANNEL_TRADE_NO" />
+		</property>
+		<property name="attach" type="java.lang.String">
+			<column name="ATTACH" />
+		</property>
+		<property name="down_data" type="java.lang.String">
+			<column name="DOWN_DATA" />
+		</property>
+		<property name="key_sign" type="java.lang.String">
+			<column name="KEY_SIGN" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="local_msg" type="java.lang.String">
+			<column name="LOCAL_MSG" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

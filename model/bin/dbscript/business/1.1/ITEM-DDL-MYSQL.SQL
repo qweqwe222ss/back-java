@@ -1,0 +1,25 @@
+DROP TABLE IF EXISTS `T_ITEM`;
+CREATE TABLE `T_ITEM` (
+  `UUID` varchar(32) NOT NULL,
+  `NAME` varchar(64) ,
+  `SYMBOL` varchar(32) ,
+  `SYMBOL_DATA` varchar(32) ,
+  `PIPS` double ,
+  `PIPS_AMOUNT` double ,
+  `ADJUSTMENT_VALUE` double ,
+  `UNIT_AMOUNT` double ,
+   `UNIT_FEE` double ,
+  `MARKET` varchar(32) ,
+  PRIMARY KEY (`UUID`),
+  KEY `INDEX_ITEM_SYMBOL` (`SYMBOL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `T_ITEM_LEVERAGE`;
+CREATE TABLE `T_ITEM_LEVERAGE` (
+  `UUID` varchar(32) NOT NULL ,
+  `ITEM_ID` varchar(32) ,
+  `LEVER_RATE` double ,
+  PRIMARY KEY (`UUID`),
+  KEY `INDEX_ITEM_LEVERAGE_ITEM_ID` (`ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

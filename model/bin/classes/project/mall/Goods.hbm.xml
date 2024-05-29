@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.mall.Goods" table="T_GOODS">
+	<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="goodName" type="java.lang.String">
+			<column name="GOOD_NAME" />
+		</property>
+		<property name="goodPrice" type="double">
+			<column name="GOOD_PRICE" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="goodShortDescript" type="java.lang.String">
+			<column name="GOOD_SHORT_DESCRIPT" />
+		</property>
+		<property name="goodDescript" type="java.lang.String">
+			<column name="GOOD_DESCRIPT" />
+		</property>
+		<property name="goodImagePath" type="java.lang.String">
+			<column name="GOOD_IMAGE_PATH" />
+		</property>
+		<property name="goodStatus" type="int">
+			<column name="GOOD_STATUS" />
+		</property>
+		<property name="num" type="int">
+			<column name="GOOD_NUM" />
+		</property>		
+		<property name="goodExchangeNum" type="int">
+			<column name="GOOD_EXCHANGE_NUM" />
+		</property>				
+	</class>
+</hibernate-mapping>

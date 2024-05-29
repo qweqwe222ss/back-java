@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.mall.Order" table="T_ORDER">
+	<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+		<property name="state" type="yes_no">
+			<column name="STATE" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="productId" type="java.lang.String">
+			<column name="PRODUCTID" />
+		</property>
+		<property name="usetime" type="int">
+			<column name="USETIME" />
+		</property>
+		<property name="orderNumber" type="java.lang.String">
+			<column name="ORDERNUMBER" />
+		</property>
+		<property name="profit" type="double">
+			<column name="PROFIT" />
+		</property>
+		<property name="percentage" type="double">
+			<column name="PERCENTAGE" />
+		</property>
+		
+		<property name="lock" type="yes_no">
+			<column name="OLOCK" />
+		</property>
+		
+		<property name="unlock_bonus" type="yes_no">
+			<column name="UNLOCK_BONUS" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

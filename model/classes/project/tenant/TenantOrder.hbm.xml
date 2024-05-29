@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.tenant.TenantOrder" table="T_TENANTORDER">
+	<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+			<property name="payPartyId" type="java.lang.String">
+			<column name="PAY_PARTY_ID" />
+		</property>
+		<property name="state" type="int">
+			<column name="STATE" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="payTime" type="timestamp">
+			<column name="PAY_TIME" />
+		</property>
+		<property name="orderNumber" type="java.lang.String">
+			<column name="ORDERNUMBER" />
+		</property>
+		<property name="price" type="double">
+			<column name="PRICE" />
+		</property>
+	</class>
+</hibernate-mapping>

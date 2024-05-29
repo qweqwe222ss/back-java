@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.report.EveryDay" table="T_EVERYDAY">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="newUserCount" type="long">
+			<column name="NEWUSERCOUNT" />
+		</property>
+		<property name="userCount" type="long">
+			<column name="USERCOUNT" />
+		</property>
+		<property name="allfund" type="double">
+			<column name="ALLFUND" />
+		</property>
+			<property name="allcoin" type="double">
+			<column name="ALLCOIN" />
+		</property>
+		
+			<property name="outputcoin" type="double">
+			<column name="OUTPUTCOIN" />
+		</property>
+			<property name="outputfund_200" type="double">
+			<column name="OUTPUTFUND_200" />
+		</property>
+		<property name="outputfund_201" type="double">
+			<column name="OUTPUTFUND_201" />
+		</property>
+		<property name="outputfund_202" type="double">
+			<column name="OUTPUTFUND_202" />
+		</property>
+		<property name="pay_type5" type="double">
+			<column name="PAY_TYPE5" />
+		</property>
+		<property name="pay_type7" type="double">
+			<column name="PAY_TYPE7" />
+		</property>
+		<property name="pay_kbci" type="double">
+			<column name="PAY_KBCI" />
+		</property>
+		<property name="pay_coin" type="double">
+			<column name="PAY_COIN" />
+		</property>
+			<property name="sellP1Count" type="long">
+			<column name="SELLP1COUNT" />
+		</property>
+			<property name="sellP2Count" type="long">
+			<column name="SELLP2COUNT" />
+		</property>
+			<property name="sellP3Count" type="long">
+			<column name="SELLP3COUNT" />
+		</property>
+			<property name="sellP4Count" type="long">
+			<column name="SELLP4COUNT" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+	
+		<property name="cash" type="double">
+			<column name="CASH" />
+		</property>
+	</class>
+</hibernate-mapping>

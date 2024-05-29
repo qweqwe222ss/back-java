@@ -1,0 +1,14 @@
+/.idea
+/.vscode
+*.log
+/public/uploads/
+/runtime/
+.env
+/public/h5
+/public/m
+/public/*.zip
+/public/*.7z
+/public/static/
+!/public/static/admin
+data/src/main/resources/credentials
+api/src/main/java/project/web/api/impl/AwsS3OSSFileService.java

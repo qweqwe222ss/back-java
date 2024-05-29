@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.fund.Cash" table="T_CASH">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK" />
+		</property>
+		<property name="coin" type="double">
+			<column name="COIN" />
+		</property>
+		<property name="shopping" type="double">
+			<column name="SHOPPING" />
+		</property>
+			<property name="cny" type="double">
+			<column name="CNY" />
+		</property>
+		
+		<property name="state" type="java.lang.Integer">
+			<column name="STATE" />
+		</property>
+		
+		<property name="type" type="java.lang.Integer">
+			<column name="CTYPE" />
+		</property>
+
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="acc_type" type="java.lang.String">
+			<column name="ACC_TYPE" />
+		</property>
+		<property name="openacc_dept" type="java.lang.String">
+			<column name="OPENACC_DEPT" />
+		</property>
+		<property name="acc_no" type="java.lang.String">
+			<column name="ACC_NO" />
+		</property>
+		<property name="acc_name" type="java.lang.String">
+			<column name="ACC_NAME" />
+		</property>
+		
+		<property name="orderCode" type="java.lang.String">
+			<column name="ORDERCODE" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

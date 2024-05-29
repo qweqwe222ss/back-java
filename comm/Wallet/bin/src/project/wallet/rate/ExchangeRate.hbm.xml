@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.wallet.rate.ExchangeRate" table="T_EXCHANGE_RATE">
+		<id name="id" type="java.lang.String" >
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="out_or_in" type="java.lang.String" update="false">
+			<column name="OUT_OR_IN" />
+		</property>
+		<property name="rata" type="java.lang.Double">
+			<column name="RATA" />
+		</property>
+		<property name="currency" type="java.lang.String" update="false">
+			<column name="CURRENCY" />
+		</property>
+		<property name="name" type="java.lang.String" update="false">
+			<column name="NAME" />
+		</property>
+	</class>
+</hibernate-mapping>

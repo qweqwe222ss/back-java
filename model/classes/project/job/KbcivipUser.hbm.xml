@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.job.KbcivipUser" table="T_KBCIVIPUSER">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="usertel" type="java.lang.String">
+			<column name="USERTEL" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="PASSWORD" />
+		</property>
+		<property name="encrypt" type="java.lang.String">
+			<column name="ENCRYPT" />
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="EMAIL" />
+		</property>
+		<property name="leadername" type="java.lang.String">
+			<column name="LEADERNAME" />
+		</property>
+	
+		
+	</class>
+</hibernate-mapping>

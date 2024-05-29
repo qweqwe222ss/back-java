@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.party.Party" table="PAT_PARTY">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="userRole" type="java.lang.String">
+			<column name="USER_ROLE" />
+		</property>
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="nickname" type="java.lang.String">
+			<column name="NICKNAME" />
+		</property>
+		<property name="userid" type="int">
+			<column name="USERID" />
+		</property>
+			<property name="safeword" type="java.lang.String">
+			<column name="SAFEWORD" />
+		</property>
+		<property name="userlevel" type="int">
+			<column name="USER_LEVEL" />
+		</property>
+		<property name="managerlevel" type="int">
+			<column name="MANAGER_LEVEL" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+			<property name="lastLoginTime" type="timestamp">
+			<column name="LAST_LOGIN_TIME" />
+		</property>
+		<property generated="never" lazy="false" name="enabled" type="yes_no">
+			<column name="ENABLED" />
+		</property>
+		<property generated="never" lazy="false" name="accountNonLocked" type="yes_no">
+			<column name="ACCOUNTNONLOCKED" />
+		</property>
+		<property name="referralCode" type="java.lang.String">
+			<column name="REFERRAL_CODE" />
+		</property>
+		<property name="remarks" type="java.lang.String">
+			<column name="REMARKS" />
+		</property>
+        <property name="tenant_name" type="java.lang.String">
+            <column name="TENANT_NAME" />
+        </property>
+        <property name="tenant_no" type="java.lang.String">
+            <column name="TENANT_NO" />
+        </property>
+	</class>
+</hibernate-mapping>

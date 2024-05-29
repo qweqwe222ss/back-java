@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.fund.Pay" table="T_PAY">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+		<property name="cny" type="double">
+			<column name="CNY" />
+		</property>
+		<property name="kbci" type="double">
+			<column name="KBCI" />
+		</property>
+		<property name="state" type="int">
+			<column name="STATE" />
+		</property>
+		<property name="paytype" type="int">
+			<column name="PAYTYPE" />
+		</property>
+		<property name="coin" type="double">
+			<column name="COIN" />
+		</property>
+		<property name="orderCode" type="java.lang.String">
+			<column name="ORDERCODE" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="CREATE_TIME" />
+		</property>
+		<property name="trade_no" type="java.lang.String">
+			<column name="TRADE_NO" />
+		</property>
+			<property name="trade_time" type="java.lang.String">
+			<column name="TRADE_TIME" />
+		</property>
+		<property name="trade_status" type="java.lang.String">
+			<column name="TRADE_STATUS" />
+		</property>
+	</class>
+</hibernate-mapping>

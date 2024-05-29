@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.fund.BackNotify" table="T_BACKNOTIFY">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="merchant_code" type="java.lang.String">
+			<column name="MERCHANT_CODE" />
+		</property>
+			<property name="notify_type" type="java.lang.String">
+			<column name="NOTIFY_TYPE" />
+		</property>
+			<property name="sign" type="java.lang.String">
+			<column name="SIGN" />
+		</property>
+			<property name="order_no" type="java.lang.String">
+			<column name="ORDER_NO" />
+		</property>
+			<property name="order_amount" type="java.lang.String">
+			<column name="ORDER_AMOUNT" />
+		</property>
+			<property name="order_time" type="java.lang.String">
+			<column name="ORDER_TIME" />
+		</property>
+			<property name="trade_no" type="java.lang.String">
+			<column name="TRADE_NO" />
+		</property>
+			<property name="trade_time" type="java.lang.String">
+			<column name="TRADE_TIME" />
+		</property>
+		<property name="trade_status" type="java.lang.String">
+			<column name="TRADE_STATUS" />
+		</property>
+		<property name="notify_info" type="java.lang.String">
+			<column name="NOTIFY_INFO" />
+		</property>
+	
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.fund.Wallet" table="T_WALLET">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="partyId" type="java.lang.String">
+			<column name="PARTY_ID" />
+		</property>
+		<property name="fund" type="double">
+			<column name="FUND" />
+		</property>
+		
+		<property name="coin" type="double">
+			<column name="COIN" />
+		</property>
+		<property name="shopping" type="double">
+			<column name="SHOPPING" />
+		</property>
+		<property name="fuxiao" type="double">
+			<column name="FUXIAO" />
+		</property>
+		<property name="bonus" type="double">
+			<column name="BONUS" />
+		</property>
+		<property name="carhouse" type="double">
+			<column name="CARHOUSE" />
+		</property>
+		<property name="binding" type="java.lang.String">
+			<column name="BINDING" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="PASSWORD" />
+		</property>
+		
+		<property name="duipeng" type="double">
+			<column name="DUIPENG" />
+		</property>
+		
+		<property name="rank" type="java.lang.Integer">
+			<column name="RANK" />
+		</property>
+		
+		<property name="left_turnover" type="double">
+			<column name="LEFT_TURNOVER" />
+		</property>
+		<property name="right_turnover" type="double">
+			<column name="RIGHT_TURNOVER" />
+		</property>
+		<property name="left_surplus" type="double">
+			<column name="LEFT_SURPLUS" />
+		</property>
+		<property name="right_surplus" type="double">
+			<column name="RIGHT_SURPLUS" />
+		</property>
+		<property name="cash" type="double">
+			<column name="CASH" />
+		</property>
+		
+		<property name="jifen" type="double">
+			<column name="JIFEN" />
+		</property>
+		
+		<property name="recharge" type="double">
+			<column name="RECHARGE" />
+		</property>
+		
+		<property name="unallocated" type="double">
+			<column name="UNALLOCATED" />
+		</property>
+		
+		<property name="unallocated_day" type="double">
+			<column name="UNALLOCATED_DAY" />
+		</property>
+	
+	</class>
+</hibernate-mapping>

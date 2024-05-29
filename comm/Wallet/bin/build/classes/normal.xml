@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="normal" namespace="/normal" extends="root">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<interceptors>
+			<interceptor name="json"
+				class="org.apache.struts2.json.JSONInterceptor" />
+		</interceptors>
+		<!-- wallet admin -->
+		<!-- 提现管理 -->
+			<action name="adminWithdrawOrderAction" class="project.wallet.withdraw.web.AdminWithdrawOrderAction" method="execute">
+			<result name="view">/admin_withdraw_order_list.jsp</result>
+		</action>
+		<!-- 充值订单管理 -->
+		<action name="adminRechargeOrderAction" class="project.wallet.recharge.web.AdminRechargeOrderAction">
+			<result name="view">/admin_recharge_order_list.jsp</result>
+		</action>
+		
+		<!--  wallet  ROOT -->
+		<!--fhtoto支付  -->
+		<action name="fhtotoPayAction" class="project.wallet.recharge.fhtoto.web.PayAction">
+			<result name="view">/wallet_recharge_fhoto.jsp</result>
+		</action>
+		
+		<action name="fhtotoPayAction" class="project.wallet.recharge.fhtoto.web.PayAction">
+			<result name="view">/wallet_recharge_fhoto.jsp</result>
+		</action>
+		
+		<!--tft支付  -->
+		<action name="tftWangGuanAction" class="project.wallet.recharge.tft.web.WangGuanAction">
+			<result name="view">/wallet_recharge_tft.jsp</result>
+		</action>
+		
+		<action name="saoMaAction" class="project.wallet.recharge.tft.web.SaoMaAction">
+			<result name="view">/wallet_recharge_tft.jsp</result>
+			<result name="qrimages">/wallet_recharge_tft_QR.jsp</result>
+		</action>
+		
+		<action name="tftPreTradeAction" class="project.wallet.recharge.tft.web.PreTradeAction">
+			<result name="view">/wallet_recharge_tft.jsp</result>
+			<result name="makeResult" type="json">  
+                <param name="root">makeResult</param>  
+            </result> 
+		</action>
+		
+		<!--提现订单查询  -->
+		<action name="withdrawOrderAction" class="project.wallet.withdraw.web.WithdrawOrderAction">
+			<result name="withdraw_log_data">/wallet_withdraw_list_data.jsp</result>
+			<result name="withdraw_log">/wallet_withdraw_list.jsp</result>
+		</action>
+		<!--提现  -->
+		
+		
+		<action name="rechargeLogAction" class="project.wallet.recharge.web.RechargeLogAction">
+			<result name="recharge_log_data">/wallet_recharge_list_data.jsp</result>
+			<result name="recharge_log">/wallet_recharge_list.jsp</result>
+		</action>
+
+	</package>
+</struts>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans         
+	    http://www.springframework.org/schema/beans/spring-beans.xsd         
+	    http://code.alibabatech.com/schema/dubbo         
+	    http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+	<!-- Service -->
+	<bean id="adminWithdrawOrderService"
+		class="project.wallet.withdraw.internal.AdminWithdrawOrderServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="pagedDao" ref="pagedDao" />
+		<property name="walletUserDataService" ref="walletUserDataService" />
+		<property name="userRecomService" ref="userRecomService" />
+		<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
+	</bean>
+
+	<bean id="adminRechargeOrderService"
+		class="project.wallet.recharge.internal.AdminRechargeOrderServiceImpl">
+		<property name="pagedDao" ref="pagedDao" />
+		<property name="userRecomService" ref="userRecomService" />
+		<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
+	</bean>
+	
+	<!-- dubbo -->
+	<dubbo:reference id="walletUserDataService"
+		interface="project.wallet.WalletUserDataService" check="false" />
+		<dubbo:reference id="walletService"
+		interface="project.wallet.WalletService" check="false" />
+
+	<!-- Action -->
+	<bean id="adminWithdrawOrderAction"
+		class="project.wallet.withdraw.web.AdminWithdrawOrderAction"
+		scope="prototype">
+		<property name="adminWithdrawOrderService" ref="adminWithdrawOrderService" />
+	</bean>
+
+	<bean id="adminRechargeOrderAction" class="project.wallet.recharge.web.AdminRechargeOrderAction"
+		scope="prototype">
+		<property name="adminRechargeOrderService" ref="adminRechargeOrderService" />
+	</bean>
+
+</beans>

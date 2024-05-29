@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="project.mall.Product" table="T_PRODUCT">
+		<id name="id" type="java.lang.String">
+			<column name="UUID" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		
+		<property name="online" type="yes_no">
+			<column name="ONLINE" />
+		</property>
+		
+		<property name="fund" type="java.lang.Double">
+			<column name="FUND" />
+		</property>
+		
+		<property name="images" type="java.lang.String">
+			<column name="IMAGES" />
+		</property>
+	
+		<property name="desc" type="java.lang.String">
+			<column name="DESCRIPTION" />
+		</property>
+		
+		<property name="usetime" type="int">
+			<column name="USETIME" />
+		</property>
+		<property name="outputCoin" type="int">
+			<column name="OUTPUTCOIN" />
+		</property>
+		<property name="outputCoin1" type="int">
+			<column name="OUTPUTCOIN1" />
+		</property>
+		<property name="outputCoin2" type="int">
+			<column name="OUTPUTCOIN2" />
+		</property>
+		<property name="type" type="int">
+			<column name="PTYPE" />
+		</property>
+		<property name="multiple" type="double">
+			<column name="MULTIPLE" />
+		</property>
+		<property name="income" type="double">
+			<column name="INCOME" />
+		</property>
+		
+	</class>
+</hibernate-mapping>
