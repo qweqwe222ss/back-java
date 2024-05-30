@@ -103,24 +103,6 @@
 									<input id="end_time" name="end_time"
 										class="form-control " placeholder="结束日期" value="${end_time}" />
 								</div>
-
-								<div class="col-md-12 col-lg-3">
-									<fieldset>
-										<div class="control-group">
-											<div class="controls">
-												<%-- <s:select id="rolename_para" cssClass="form-control "
-                                                    name="rolename_para"
-                                                    list="#{'MEMBER':'正式账号','GUEST':'演示账号','TEST':'试用账号'}" listKey="key"
-                                                    listValue="value" headerKey="" headerValue="所有账号"
-                                                    value="rolename_para" /> --%>
-												<select id="freeze" name="freeze" class="form-control " style="margin-top:10px;">
-													<option value="0" <c:if test="${freeze == '0'}">selected="true"</c:if> >正常资金</option>
-													<option value="1" <c:if test="${freeze == '1'}">selected="true"</c:if> >冻结资金</option>
-												</select>
-											</div>
-										</div>
-									</fieldset>
-								</div>
 								
 								<div class="col-md-12 col-lg-2" style="margin-top:10px;" >
 <%-- 									<c:if test="${security.isResourceAccessible('ADMIN_MONEY_LOG_LIST')}"> --%>
@@ -154,14 +136,12 @@
 										<td>UID</td>
 										<td>推荐人</td>
 										<td>账户类型</td>
-										<td>冻结资金</td>
 										<td>日志</td>
 										<td>币种</td>
 										<td>金额</td>
 										<td>变更前</td>
 										<td>变更后</td>
 										<td width="150px">时间</td>
-										<td width="150px">备注</td>
 									</tr>
 								</thead>
 								
@@ -209,23 +189,12 @@
 													</c:otherwise>	
 												</c:choose>
 											</td>
-											<td>
-												<c:choose>
-													<c:when test="${item.freeze=='1'}">
-														是
-													</c:when>
-													<c:when test="${item.freeze=='0'}">
-													 否
-													</c:when>
-												</c:choose>
-											</td>
 											<td>${item.log}</td>
 											<td>${item.wallettype}</td>
 											<td><fmt:formatNumber value="${item.amount}" pattern="#0.00" /></td>
 											<td><fmt:formatNumber value="${item.amount_before}" pattern="#0.00" /></td>
 											<td><fmt:formatNumber value="${item.amount_after}" pattern="#0.00" /></td>
 											<td>${item.createTime}</td>
-											<td>${item.remarks}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

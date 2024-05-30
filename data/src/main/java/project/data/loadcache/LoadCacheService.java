@@ -47,7 +47,7 @@ public class LoadCacheService {
 //		cmsLoadCacheService.loadcache();
 		//newsLoadCacheService.loadcache();
 		//futuresLoadCacheService.loadcache();
-		walletLoadCacheService.loadcache();
+//		walletLoadCacheService.loadcache();
 		logger.info("完成数据redis加载。");
 		mallLoadCacheService.loadcache();
 	}

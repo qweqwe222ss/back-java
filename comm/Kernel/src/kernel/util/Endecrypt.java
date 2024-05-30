@@ -10,10 +10,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
 //jdk7下的加密解密
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 
 //jdk8下的加密解密
-//import java.util.Base64;
+import java.util.Base64;
 /**
  * <p>
  * Title:加密解密测试
@@ -100,10 +100,10 @@ public class Endecrypt {
 		String requestValue = "";
 		try {
 			// jdk7下的加密解密
-			Base64 base64en = new Base64();
-			requestValue = base64en.encodeAsString(src);
+//			Base64 base64en = new Base64();
+//			requestValue = base64en.encodeAsString(src);
 			// jdk8下的加密解密
-//			requestValue = new String(Base64.getEncoder().encode(src));
+			requestValue = new String(Base64.getEncoder().encode(src));
 			// System.out.println(requestValue);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -235,10 +235,10 @@ public class Endecrypt {
 			String URLValue = getURLDecoderdecode(src);
 			// 进行3-DES加密后的内容进行BASE64编码
 			// jdk7
-			Base64 base64en = new Base64();
-			byte[] base64DValue = base64en.decodeBase64(URLValue);
+//			Base64 base64en = new Base64();
+//			byte[] base64DValue = base64en.decodeBase64(URLValue);
 			// jdk8
-//			byte[] base64DValue = Base64.getDecoder().decode(URLValue);
+			byte[] base64DValue = Base64.getDecoder().decode(URLValue);
 			// 要进行3-DES加密的内容在进行/"UTF-16LE/"取字节
 			requestValue = deCrypt(base64DValue, spkey);
 		} catch (Exception e) {
