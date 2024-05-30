@@ -11,7 +11,7 @@ public interface AdminLogService {
 	 * @param log_para 日志 like查询
 	 * @param wallettype 账户类型
 	 */
-	public  Page pagedQueryMoneyLog(int pageNo, int pageSize, String log_para,String name_para,String loginPartyId,String rolename_para,String startTime,String endTime,String frozenState);
+	public  Page pagedQueryMoneyLog(int pageNo, int pageSize, String log_para,String name_para,String loginPartyId,String rolename_para,String startTime,String endTime);
 
 	/**
 	 * 

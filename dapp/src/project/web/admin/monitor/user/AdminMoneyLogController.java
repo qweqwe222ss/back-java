@@ -55,7 +55,7 @@ public class AdminMoneyLogController extends PageActionSupport {
 			
 			String loginPartyId = this.getLoginPartyId();
 			this.page = this.adminLogService.pagedQueryMoneyLog(this.pageNo, this.pageSize, log_para, name_para,
-					loginPartyId, rolename_para, start_time, end_time, freeze);
+					loginPartyId, rolename_para, start_time, end_time);
 
 			List<Map<String, Object>> list = (List<Map<String, Object>>) this.page.getElements();
 			for (int i = 0; i < list.size(); i++) {
