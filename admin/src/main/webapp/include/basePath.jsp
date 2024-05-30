@@ -3,7 +3,7 @@
 
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String basePath = "https://"+request.getServerName()+path+"/";
     String base = "http://" + request.getServerName() + ":"+request.getServerPort()+"/";
     // String username = security.getUsername_login();
 %>
