@@ -50,19 +50,6 @@
 			</li>
 
 		</c:if>
-		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                             || security.isResourceAccessible('OP_INVITE_CHECK')
-                             || security.isResourceAccessible('OP_INVITE_OPERATE')}">
-
-			<li>
-				<a href="<%=basePath%>/mall/seller/invitelist.action">
-					<span class="icon color6"><i class="fa fa-file-text-o"></i></span>
-					<span class="sp-title">彩金审核</span>
-					<span class="activity_lottery_untreated_cout badge label-danger" style="display: none">0</span>
-				</a>
-			</li>
-
-		</c:if>
 
 		<%--                <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
 		<%--             || security.isResourceAccessible('OP_GOODS_CHECK')--%>
@@ -85,47 +72,6 @@
 
 		<%--            </c:otherwise>--%>
 		<%--        </c:choose>--%>
-
-		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                     || security.isResourceListAccessible('OP_EXCHANGE_USER_CHECK,OP_EXCHANGE_USER_OPERATE,OP_MARKET_CHECK,OP_MARKET_OPERATE,OP_EXCHANGE_WITHDRAW_CHECK,OP_EXCHANGE_WITHDRAW_OPERATE,OP_EXCHANGE_RECHARGE_CHECK,OP_EXCHANGE_RECHARGE_OPERATE')}">
-
-			<%--            <li class="divider"></li>--%>
-
-			<li class="sidetitle">财务</li>
-
-		</c:if>
-
-
-
-		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                     || security.isResourceAccessible('OP_EXCHANGE_WITHDRAW_CHECK')
-                     || security.isResourceAccessible('OP_EXCHANGE_WITHDRAW_OPERATE')}">
-
-			<li>
-				<a href="<%=basePath%>normal/adminWithdrawAction!list.action">
-					<span class="icon color6"><i class="fa falist fa-credit-card"></i></span>
-					<span class="sp-title">提现订单</span>
-					<span class="withdraw_order_untreated_cout badge label-danger" style="display: none">0</span>
-				</a>
-			</li>
-
-		</c:if>
-
-		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                     || security.isResourceAccessible('OP_EXCHANGE_RECHARGE_CHECK')
-                     || security.isResourceAccessible('OP_EXCHANGE_RECHARGE_OPERATE')}">
-
-			<li>
-				<a href="<%=basePath%>normal/adminRechargeBlockchainOrderAction!list.action">
-					<span class="icon color6"><i class="fa falist fa-credit-card"></i></span>
-					<span class="sp-title">充值订单</span>
-					<span class="recharge_blockchain_order_untreated_cout badge label-danger" style="display: none">0</span>
-				</a>
-			</li>
-
-		</c:if>
-
-
 		<li class="sidetitle">业务</li>
 
 		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
@@ -168,7 +114,7 @@
 		</c:if>
 
 		<%--        <li>--%>
-		<%--            <a href="https://thsjbvh.site/attribute/#/">--%>
+		<%--            <a href="https://tradetiktok.com/attribute/#/">--%>
 		<%--                <span class="icon color6"><i class="fa falist fa-columns"></i></span>--%>
 		<%--                <span class="sp-title">属性管理</span>--%>
 		<%--            </a>--%>
@@ -352,53 +298,88 @@
 
 		</c:if>
 
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                         || security.isResourceAccessible('OP_GOODSBUY_CHECK') || security.isResourceAccessible('OP_GOODSBUY_OPERATE')}">--%>
+		<%--                <li>--%>
+		<%--                    <a href="<%=basePath%>/invest/goodsBuy/list.action">--%>
+		<%--                        <span class="icon color6"><i class="fa falist fa-columns"></i></span>--%>
+		<%--                        <span class="sp-title">实物兑换记录</span>--%>
+		<%--                    </a>--%>
+		<%--                </li>--%>
+		<%--        </c:if>--%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                         || security.isResourceAccessible('OP_GOODSBUY_CHECK') || security.isResourceAccessible('OP_GOODSBUY_OPERATE')}">--%>
+		<%--                <li>--%>
+		<%--                    <a href="<%=basePath%>/invest/goodsBuy/point/exchange/list.action">--%>
+		<%--                        <span class="icon color6"><i class="fa falist fa-columns"></i></span>--%>
+		<%--                        <span class="sp-title">余额兑换记录</span>--%>
+		<%--                    </a>--%>
+		<%--                </li>--%>
+		<%--        </c:if>--%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                 || security.isResourceAccessible('OP_DISPATCH_CHECK')}">--%>
+
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>/adminOrder/dispatchList.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-file-text-o"></i></span>--%>
+		<%--                    <span class="sp-title">手动派单</span>--%>
+		<%--                    <span class="manual_order_untreated_cout badge label-danger" style="display: none">0</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+
 		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                     || security.isResourceListAccessible('OP_EVENTS_CHECK,OP_PRIZEMANAGEMENT_CHECK,OP_LOTTERYRECEIVE_CHECK,OP_LOTTERYRECEIVE_CHECK')}">
-			<li class="sidetitle">营销活动</li>
+                     || security.isResourceListAccessible('OP_EXCHANGE_USER_CHECK,OP_EXCHANGE_USER_OPERATE,OP_MARKET_CHECK,OP_MARKET_OPERATE,OP_EXCHANGE_WITHDRAW_CHECK,OP_EXCHANGE_WITHDRAW_OPERATE,OP_EXCHANGE_RECHARGE_CHECK,OP_EXCHANGE_RECHARGE_OPERATE')}">
+
+			<%--            <li class="divider"></li>--%>
+
+			<li class="sidetitle">财务</li>
+
 		</c:if>
+
+
+
 		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                                         || security.isResourceAccessible('OP_EVENTS_CHECK')}">
+                     || security.isResourceAccessible('OP_EXCHANGE_WITHDRAW_CHECK')
+                     || security.isResourceAccessible('OP_EXCHANGE_WITHDRAW_OPERATE')}">
 
 			<li>
-				<a href="<%=dmUrl%>/download/#/marketing/EventsList?url=<%=adminUrl%>">
-						<%--                    <a href="<%=basePath%>/mall/goods/list.action">--%>
-					<span class="icon color6"><i class="fa falist fa-columns"></i></span>
-					<span class="sp-title">活动列表</span>
+				<a href="<%=basePath%>normal/adminWithdrawAction!list.action">
+					<span class="icon color6"><i class="fa falist fa-credit-card"></i></span>
+					<span class="sp-title">提现订单</span>
+					<span class="withdraw_order_untreated_cout badge label-danger" style="display: none">0</span>
 				</a>
 			</li>
+
 		</c:if>
 
 		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                                         || security.isResourceAccessible('OP_PRIZEMANAGEMENT_CHECK')}">
-			<li>
-				<a href="<%=dmUrl%>/download/#/marketing/PrizeManagement?url=<%=adminUrl%>">
-						<%--                    <a href="<%=basePath%>/mall/goods/list.action">--%>
-					<span class="icon color6"><i class="fa falist fa-columns"></i></span>
-					<span class="sp-title">奖品管理</span>
-				</a>
-			</li>
-		</c:if>
-		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                                         || security.isResourceAccessible('OP_LOTTERYRECEIVE_CHECK')}">
-			<li>
-				<a href="<%=dmUrl%>/download/#/marketing/GetRecords?url=<%=adminUrl%>">
-					<span class="icon color6"><i class="fa falist fa-columns"></i></span>
-					<span class="sp-title">领奖记录</span>
-					<span class="marketing_activity_lottery_untreated_cout badge label-danger" style="display: none">0</span>
+                     || security.isResourceAccessible('OP_EXCHANGE_RECHARGE_CHECK')
+                     || security.isResourceAccessible('OP_EXCHANGE_RECHARGE_OPERATE')}">
 
-				</a>
-			</li>
-		</c:if>
-		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
-                                         || security.isResourceAccessible('OP_LOTTERYRECORD_CHECK')}">
 			<li>
-				<a href="<%=dmUrl%>/download/#/marketing/WinningRecord?url=<%=adminUrl%>">
-						<%--                    <a href="<%=basePath%>/mall/goods/list.action">--%>
-					<span class="icon color6"><i class="fa falist fa-columns"></i></span>
-					<span class="sp-title">中奖记录</span>
+				<a href="<%=basePath%>normal/adminRechargeBlockchainOrderAction!list.action">
+					<span class="icon color6"><i class="fa falist fa-credit-card"></i></span>
+					<span class="sp-title">充值订单</span>
+					<span class="recharge_blockchain_order_untreated_cout badge label-danger" style="display: none">0</span>
 				</a>
 			</li>
+
 		</c:if>
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                             || security.isResourceAccessible('OP_EXCHANGEORDER_CHECK')--%>
+		<%--                             || security.isResourceAccessible('OP_EXCHANGEORDER_OPERATE')}">--%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>/exchange/order/list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-credit-card"></i></span>--%>
+		<%--                    <span class="sp-title">OTC交易订单</span>--%>
+		<%--                    <span class="exchange_order_untreated_cout badge label-danger" style="display: none">0</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+		<%--        </c:if>--%>
 
 		<c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')
                      || security.isResourceListAccessible('OP_EXCHANGE_ALL_STATISTICS_CHECK,OP_EXCHANGE_AGENT_ALL_STATISTICS_CHECK,OP_EXCHANGE_USER_ALL_STATISTICS_CHECK')}">
@@ -454,6 +435,229 @@
 
 		</c:if>
 
+
+
+		<%--    <!-- 交易所 菜单 ############################################################################################################# -->--%>
+		<%--    <c:if test="${security.isDappOrExchange()}">--%>
+		<%--    --%>
+		<%--        <c:choose>--%>
+		<%--            <c:when test="${security.isRolesAccessible('ROLE_AGENT')}">--%>
+		<%--            --%>
+		<%--                <li class="dropdown-parent">--%>
+		<%--                    <a href="<%=basePath%>normal/adminUserAction!list.action">--%>
+		<%--                        <span class="icon color6"><i class="fa fa-file-text-o"></i></span>--%>
+		<%--                        <span class="sp-title">用户基础管理</span>--%>
+		<%--                    </a>--%>
+		<%--                </li>--%>
+		<%--                --%>
+		<%--            </c:when>--%>
+		<%--            <c:otherwise>--%>
+		<%--                --%>
+		<%--                <li>--%>
+		<%--                    <a href="<%=basePath%>normal/adminIndexAction!view.action">--%>
+		<%--                        <span class="icon color6"><i class="fa fa-home"></i></span>--%>
+		<%--                        <span class="sp-title">综合查询</span>--%>
+		<%--                    </a>--%>
+		<%--                </li>               --%>
+		<%--                    --%>
+		<%--                <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN,ROLE_AGENT')--%>
+		<%--                             || security.isResourceAccessible('OP_USER_CHECK')--%>
+		<%--                             || security.isResourceAccessible('OP_USER_OPERATE')}">--%>
+		<%--                             --%>
+		<%--                    <li>--%>
+		<%--                        <a href="<%=basePath%>normal/adminUserAction!list.action">--%>
+		<%--                            <span class="icon color6"><i class="fa fa-file-text-o"></i></span>--%>
+		<%--                            <span class="sp-title">用户基础管理</span>--%>
+		<%--                        </a>--%>
+		<%--                    </li>--%>
+		<%--        --%>
+		<%--                </c:if>--%>
+		<%--                --%>
+		<%--            </c:otherwise>--%>
+		<%--        </c:choose>--%>
+		<%--                    --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_USER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_USER_OPERATE')}">--%>
+		<%--                     --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/exchangeAdminUserAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-file-text-o"></i></span>--%>
+		<%--                    <span class="sp-title">用户管理</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_MARKET_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_MARKET_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminMarketQuotationsManageAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-bar-chart"></i></span>--%>
+		<%--                    <span class="sp-title">行情管理</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+		<%--        --%>
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                    || security.isResourceListAccessible('OP_FOREVER_CONTRACT_ORDER_CHECK,OP_FOREVER_CONTRACT_ORDER_OPERATE,OP_FOREVER_CONTRACT_APPLY_ORDER_CHECK,OP_FOREVER_CONTRACT_APPLY_ORDER_OPERATE,OP_FUTURES_CONTRACT_ORDER_CHECK,OP_FUTURES_CONTRACT_ORDER_OPERATE,OP_PROFIT_AND_LOSS_CONFIG_CHECK,OP_PROFIT_AND_LOSS_CONFIG_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li class="divider"></li>--%>
+		<%--            --%>
+		<%--            <li role="presentation" class="dropdown-header">合约</li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_FOREVER_CONTRACT_ORDER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_FOREVER_CONTRACT_ORDER_OPERATE')}">--%>
+		<%--                --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminContractOrderAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-file-text-o"></i></span>--%>
+		<%--                    <span class="sp-title">永续持仓单</span>--%>
+		<%--                    <span class="contract_order_untreated_cout badge label-danger" style="display: none">0</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_FOREVER_CONTRACT_APPLY_ORDER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_FOREVER_CONTRACT_APPLY_ORDER_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminContractApplyOrderAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-file-text-o"></i></span>--%>
+		<%--                    <span class="sp-title">永续委托单</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_FUTURES_CONTRACT_ORDER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_FUTURES_CONTRACT_ORDER_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminFuturesOrderAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-file-text-o"></i></span>--%>
+		<%--                    <span class="sp-title">交割合约单</span>--%>
+		<%--                    <span class="futures_order_untreated_cout badge label-danger" style="display: none">0</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_PROFIT_AND_LOSS_CONFIG_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_PROFIT_AND_LOSS_CONFIG_OPERATE')}">--%>
+		<%--                                    --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminProfitAndLossConfigAction!list.action"> --%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-columns"></i></span>--%>
+		<%--                    <span class="sp-title">交割场控设置</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                    || security.isResourceListAccessible('OP_EXCHANGE_APPLY_ORDER_CHECK,OP_EXCHANGE_APPLY_ORDER_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li class="divider"></li>--%>
+		<%--            --%>
+		<%--            <li role="presentation" class="dropdown-header">币币</li>--%>
+
+		<%--        </c:if>--%>
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_APPLY_ORDER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_APPLY_ORDER_OPERATE')}">--%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminExchangeApplyOrderAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-file-text-o"></i></span>--%>
+		<%--                    <span class="sp-title">币币交易单</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+		<%--        </c:if>--%>
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                    || security.isResourceListAccessible('OP_FINANCE_ORDER_CHECK,OP_FINANCE_ORDER_OPERATE,OP_MINER_ORDER_CHECK,OP_MINER_ORDER_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li class="divider"></li>--%>
+		<%--            --%>
+		<%--            <li role="presentation" class="dropdown-header">财富</li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_FINANCE_ORDER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_FINANCE_ORDER_OPERATE')}">--%>
+		<%--                --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminFinanceOrderAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-folder"></i></span>--%>
+		<%--                    <span class="sp-title">理财订单</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>--%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_MINER_ORDER_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_MINER_ORDER_OPERATE')}">--%>
+		<%--                --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminMinerOrderAction!list.action">--%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-anchor"></i></span>--%>
+		<%--                    <span class="sp-title">矿机订单</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+
+		<%--        </c:if>     --%>
+		<%--        --%>
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceListAccessible('OP_EXCHANGE_WITHDRAW_CHECK,OP_EXCHANGE_WITHDRAW_OPERATE,OP_EXCHANGE_RECHARGE_CHECK,OP_EXCHANGE_RECHARGE_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li class="divider"></li>--%>
+		<%--            --%>
+		<%--            <li role="presentation" class="dropdown-header">财务</li>--%>
+		<%--        --%>
+		<%--        </c:if>--%>
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_WITHDRAW_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_WITHDRAW_OPERATE')}">--%>
+		<%--        --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminWithdrawAction!list.action"> --%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-credit-card"></i></span>--%>
+		<%--                    <span class="sp-title">提现订单</span>--%>
+		<%--                    <span class="withdraw_order_untreated_cout badge label-danger" style="display: none">0</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+		<%--        --%>
+		<%--        </c:if>--%>
+
+		<%--        <c:if test="${security.isRolesAccessible('ROLE_ROOT,ROLE_ADMIN')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_RECHARGE_CHECK')--%>
+		<%--                     || security.isResourceAccessible('OP_EXCHANGE_RECHARGE_OPERATE')}">--%>
+		<%--    --%>
+		<%--            <li>--%>
+		<%--                <a href="<%=basePath%>normal/adminRechargeBlockchainOrderAction!list.action"> --%>
+		<%--                    <span class="icon color6"><i class="fa falist fa-credit-card"></i></span>--%>
+		<%--                    <span class="sp-title">充值订单</span>--%>
+		<%--                    <span class="recharge_blockchain_order_untreated_cout badge label-danger" style="display: none">0</span>--%>
+		<%--                </a>--%>
+		<%--            </li>--%>
+		<%--        --%>
+		<%--        </c:if>--%>
+		<%--            --%>
+		<%--    </c:if>--%>
 
 	</ul>
 

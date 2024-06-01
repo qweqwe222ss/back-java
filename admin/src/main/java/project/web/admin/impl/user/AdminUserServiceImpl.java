@@ -179,8 +179,7 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 						+ " party.LAST_LOGIN_TIME last_loginTime, party.ENABLED enabled, party.ROLENAME rolename, party.CREATE_TIME create_time, "
 						+ " party.REMARKS remarks, party.USERCODE usercode, v.NAME vipName, "
 						+ " party_parent.USERNAME username_parent, party.LOGIN_IP login_ip, party.GIFT_USER gift_user, party.USER_LEVEL user_level, "
-						+ " party.REGSITER_USERCODE register_usercode, wallet.MONEY money, wa.AMOUNT integralAmount, wallet.MONEY_AFTER_FROZEN moneyAfterFrozen, "
-						+ " wallet.FROZEN_STATE  "
+						+ " party.REGSITER_USERCODE register_usercode, wallet.MONEY money, wa.AMOUNT integralAmount "
 
 		);
 		queryString.append(

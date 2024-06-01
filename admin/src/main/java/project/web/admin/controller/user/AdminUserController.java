@@ -221,24 +221,6 @@ public class AdminUserController extends PageActionSupport {
 					map.put("agentCode",agentParty.getUsercode());
 				}
 			}
-
-			List<ActivityUserPoints> activityUserPointsList = activityUserPointsService.getByActivityId("0", ActivityTypeEnum.SIMPLE_LOTTERY.getType(), partyIdList);
-			Map<String, ActivityUserPoints> activityPointsMap = new HashMap<>();
-			for (ActivityUserPoints onePoints : activityUserPointsList) {
-				activityPointsMap.put(onePoints.getPartyId(), onePoints);
-			}
-			for (int i = 0; i < list.size(); i++) {
-				Map map = list.get(i);
-				String tmpPartyId = map.get("id") == null ? null : map.get("id").toString();
-				if (StrUtil.isBlank(tmpPartyId)) {
-					continue;
-				}
-				ActivityUserPoints activityUserPoints = activityPointsMap.get(tmpPartyId);
-				if (activityUserPoints != null) {
-					map.put("activityPoints", activityUserPoints.getPoints());
-				}
-			}
-
 			String url = PropertiesUtil.getProperty("admin_url") + "/normal/adminUserAction!list.action";
 			this.result = JsonUtils.getJsonString(this.adminAgentService.findAgentNodes(this.getLoginPartyId(), checkedPartyId, url));
 

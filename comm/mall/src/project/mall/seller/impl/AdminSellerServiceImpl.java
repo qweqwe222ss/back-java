@@ -83,7 +83,7 @@ public class AdminSellerServiceImpl extends HibernateDaoSupport implements Admin
         StringBuffer queryString = new StringBuffer();
         queryString.append(" SELECT ");
         queryString.append(" s.UUID sellerId, s.CREATE_TIME createTime, s.NAME sellerName, s.AVATAR avatar, s.SHOP_PHONE shopPhone, s.MALL_LEVEL level, ");
-        queryString.append(" wallet.MONEY money, wallet.FROZEN_STATE frozenState, wallet.MONEY_AFTER_FROZEN moneyAfterFrozen, s.REC_TIME recTime, s.FREEZE freeze, ");
+        queryString.append(" wallet.MONEY money, s.REC_TIME recTime, s.FREEZE freeze, s.REALS reals, s.FAKE fake, s.BLACK  black,  ");
         queryString.append(" s.REALS reals, s.FAKE fake, s.BLACK  black, party.USERCODE userCode, party.ROLENAME rolename, s.CREDIT_SCORE creditScore, party.USERNAME userName,");
         queryString.append(" party_parent.USERNAME username_parent, kyc.REMARK remark, party.REMARKS remarks,");
         queryString.append(" s.BASE_TRAFFIC baseTraffic, s.AUTO_START autoStart, s.AUTO_END autoEnd,s.TEAM_NUM teamNum ,s.CHILD_NUM childNum  ");
