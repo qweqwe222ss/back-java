@@ -19,12 +19,6 @@
 		<property name="rechargeCommission" type="java.lang.Double">
 			<column name="RECHARGE_COMMISSION" />
 		</property>
-		<property name="frozenState" type="int">
-			<column name="FROZEN_STATE" />
-		</property>
-		<property name="moneyAfterFrozen" type="java.lang.Double">
-			<column name="MONEY_AFTER_FROZEN" />
-		</property>
 
 
 	</class>
