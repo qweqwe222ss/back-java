@@ -343,7 +343,7 @@ public class AdminMallOrderServiceImpl extends HibernateDaoSupport implements Ad
                 throw new BusinessException("虚拟订单不能手动发货");
             }*/
 
-            if (orders.getStatus() == 2 && orders.getPurchStatus() == 1) {
+            if (orders.getStatus() == 2) {
                 orders.setStatus(3);
                 orders.setUpTime(new Date().getTime());
                 this.getHibernateTemplate().update(orders);
