@@ -37,11 +37,5 @@
 		<property name="content_type" type="java.lang.String">
 			<column name="CONTENT_TYPE" />
 		</property>
-		<property name="freeze" type="int">
-			<column name="FREEZE" />
-		</property>
-		<property name="remarks" type="java.lang.String">
-			<column name="REMARKS" />
-		</property>
 	</class>
 </hibernate-mapping>
