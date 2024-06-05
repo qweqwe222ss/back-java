@@ -29,8 +29,8 @@
             font-weight: 700;}
         .ip01{width:420px; margin:0 auto 30px auto; text-align:center;}
         .ip03{ width:420px; height:50px; line-height:50px; border:0px; font-size:16px; text-indent:45px;border-radius:5px; color: #000;}
-        .ip-n{ background:url(image/n2.png) no-repeat 15px center #fff; background-size:25px;}
-        .ip-p{ background:url(image/p2.png) no-repeat 15px center #fff; background-size:25px;}
+        .ip-n{ background:url(<%=basePath%>image/n2.png) no-repeat 15px center #fff; background-size:25px;}
+        .ip-p{ background:url(<%=basePath%>image/p2.png) no-repeat 15px center #fff; background-size:25px;}
         .bn01{ background:#1890ff; color:#fff; font:20px/30px Arial, Helvetica, sans-serif; padding:14px 0; width:420px; border:0; border-radius:5px;}
         .footer{height: 40px;
             line-height: 40px;
