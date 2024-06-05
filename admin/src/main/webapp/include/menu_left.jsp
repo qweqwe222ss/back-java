@@ -114,7 +114,7 @@
 		</c:if>
 
 		<%--        <li>--%>
-		<%--            <a href="https://tradetiktok.com/attribute/#/">--%>
+		<%--            <a href="https://www.tkgomall.com//attribute/#/">--%>
 		<%--                <span class="icon color6"><i class="fa falist fa-columns"></i></span>--%>
 		<%--                <span class="sp-title">属性管理</span>--%>
 		<%--            </a>--%>
