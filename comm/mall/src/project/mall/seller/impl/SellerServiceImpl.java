@@ -23,7 +23,6 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import project.Constants;
 import project.log.MoneyLog;
 import project.log.MoneyLogService;
-import project.mall.activity.model.lottery.LotteryReceive;
 import project.mall.seller.SellerService;
 import project.mall.seller.dto.SellerOrderLineDTO;
 import project.mall.seller.model.Seller;
@@ -877,51 +876,51 @@ public class SellerServiceImpl extends HibernateDaoSupport implements SellerServ
         if (seller.getRechargeBonusStatus()!=1) {
             throw new BusinessException("不满足领取条件");
         }
-//        Wallet wallet = walletService.saveWalletByPartyId(seller.getId());
-//        double amount_before = wallet.getMoney();
+        Wallet wallet = walletService.saveWalletByPartyId(seller.getId());
+        double amount_before = wallet.getMoney();
         final double rechargeBonus = seller.getRechargeBonus();
 
         //10/20 首充奖金 后台审核后发放
         seller.setRechargeBonusStatus(2);
         this.updateSeller(seller);
 
-        Party party = this.partyService.cachePartyBy(seller.getId(), false);
-        LotteryReceive receive = new LotteryReceive();
-        receive.setCreateTime(new Date());
-        receive.setApplyTime(new Date());
-        receive.setPrizeType(2);//彩金类型2
-        receive.setState(0);
-        receive.setLotteryName("首充活动");
-        receive.setActivityType(0);
-        receive.setPartyId(seller.getId().toString());
-        receive.setPartyName(party.getUsername());
-        receive.setPrizeAmount(BigDecimal.valueOf(rechargeBonus));
-        receive.setRecommendName(recommendName);
-        receive.setSellerName(seller.getName());
+//        Party party = this.partyService.cachePartyBy(seller.getId(), false);
+//        LotteryReceive receive = new LotteryReceive();
+//        receive.setCreateTime(new Date());
+//        receive.setApplyTime(new Date());
+//        receive.setPrizeType(2);//彩金类型2
+//        receive.setState(0);
+//        receive.setLotteryName("首充活动");
+//        receive.setActivityType(0);
+//        receive.setPartyId(seller.getId().toString());
+//        receive.setPartyName(party.getUsername());
+//        receive.setPrizeAmount(BigDecimal.valueOf(rechargeBonus));
+//        receive.setRecommendName(recommendName);
+//        receive.setSellerName(seller.getName());
 
         //保存申请彩金记录
-        this.getHibernateTemplate().saveOrUpdate(receive);
-
-        if (Constants.SECURITY_ROLE_MEMBER.equals(party.getRolename())) {
-            this.tipService.saveTip(receive.getId().toString(), TipConstants.ACTIVITY_LOTTERY);
-        }
+//        this.getHibernateTemplate().saveOrUpdate(receive);
+//
+//        if (Constants.SECURITY_ROLE_MEMBER.equals(party.getRolename())) {
+//            this.tipService.saveTip(receive.getId().toString(), TipConstants.ACTIVITY_LOTTERY);
+//        }
 
 //        //更新钱包余额
-//        wallet.setMoney(Arith.add(wallet.getMoney(), rechargeBonus));
-//        walletService.update(wallet.getPartyId().toString(), Arith.add(0, rechargeBonus));
-//
-//        MoneyLog moneyLog = new MoneyLog();
-//        moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
-//        moneyLog.setAmount_before(amount_before);
-//        moneyLog.setAmount(Arith.add(0, rechargeBonus));
-//        moneyLog.setAmount_after(wallet.getMoney());
-//
-//        moneyLog.setLog("首次充值赠送礼金:"+rechargeBonus);
-//        moneyLog.setPartyId(seller.getId().toString());
-//        moneyLog.setWallettype(Constants.WALLET);
-//        moneyLog.setContent_type(Constants.MONEYLOG_CONTNET_FIRST_RECHARGE_BONUS);
-//
-//        moneyLogService.save(moneyLog);
+        wallet.setMoney(Arith.add(wallet.getMoney(), rechargeBonus));
+        walletService.update(wallet.getPartyId().toString(), Arith.add(0, rechargeBonus));
+
+        MoneyLog moneyLog = new MoneyLog();
+        moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
+        moneyLog.setAmount_before(amount_before);
+        moneyLog.setAmount(Arith.add(0, rechargeBonus));
+        moneyLog.setAmount_after(wallet.getMoney());
+
+        moneyLog.setLog("首次充值赠送礼金:"+rechargeBonus);
+        moneyLog.setPartyId(seller.getId().toString());
+        moneyLog.setWallettype(Constants.WALLET);
+        moneyLog.setContent_type(Constants.MONEYLOG_CONTNET_FIRST_RECHARGE_BONUS);
+
+        moneyLogService.save(moneyLog);
 
     }
 
@@ -929,50 +928,50 @@ public class SellerServiceImpl extends HibernateDaoSupport implements SellerServ
         if (seller.getInviteAmountReward()<=0) {
             throw new BusinessException("不满足领取条件");
         }
-//        Wallet wallet = walletService.saveWalletByPartyId(seller.getId());
-//        double amount_before = wallet.getMoney();
+        Wallet wallet = walletService.saveWalletByPartyId(seller.getId());
+        double amount_before = wallet.getMoney();
         final double rechargeBonus = seller.getInviteAmountReward();
         seller.setInviteAmountReward(0);
         seller.setInviteReceivedReward(Arith.add(seller.getInviteReceivedReward(),rechargeBonus));
         this.updateSeller(seller);
 
-        LotteryReceive receive = new LotteryReceive();
-        receive.setCreateTime(new Date());
-        receive.setApplyTime(new Date());
-        receive.setPrizeType(2);//彩金类型2
-        receive.setState(0);
-        receive.setLotteryName("拉人活动");
-        receive.setActivityType(0);
-        receive.setPartyId(seller.getId().toString());
-        receive.setPartyName(username);
-        receive.setPrizeAmount(new BigDecimal(rechargeBonus));
-        receive.setRecommendName(recommendName);
-        receive.setSellerName(seller.getName());
-
-        //保存申请彩金记录
-        this.getHibernateTemplate().saveOrUpdate(receive);
+//        LotteryReceive receive = new LotteryReceive();
+//        receive.setCreateTime(new Date());
+//        receive.setApplyTime(new Date());
+//        receive.setPrizeType(2);//彩金类型2
+//        receive.setState(0);
+//        receive.setLotteryName("拉人活动");
+//        receive.setActivityType(0);
+//        receive.setPartyId(seller.getId().toString());
+//        receive.setPartyName(username);
+//        receive.setPrizeAmount(new BigDecimal(rechargeBonus));
+//        receive.setRecommendName(recommendName);
+//        receive.setSellerName(seller.getName());
+//
+//        //保存申请彩金记录
+//        this.getHibernateTemplate().saveOrUpdate(receive);
 
         //更新钱包余额
-//        wallet.setMoney(Arith.add(wallet.getMoney(), rechargeBonus));
-//        walletService.update(wallet.getPartyId().toString(), Arith.add(0, rechargeBonus));
-//
-//        MoneyLog moneyLog = new MoneyLog();
-//        moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
-//        moneyLog.setAmount_before(amount_before);
-//        moneyLog.setAmount(Arith.add(0, rechargeBonus));
-//        moneyLog.setAmount_after(wallet.getMoney());
-//
-//        moneyLog.setLog("邀请奖励:"+rechargeBonus);
-//        moneyLog.setPartyId(seller.getId().toString());
-//        moneyLog.setWallettype(Constants.WALLET);
-//        moneyLog.setContent_type(Constants.MONEYLOG_CONTNET_INVITATION_REWARDS);
-//
-//        moneyLogService.save(moneyLog);
+        wallet.setMoney(Arith.add(wallet.getMoney(), rechargeBonus));
+        walletService.update(wallet.getPartyId().toString(), Arith.add(0, rechargeBonus));
 
-        Party party = this.partyService.cachePartyBy(seller.getId(), false);
-        if (Constants.SECURITY_ROLE_MEMBER.equals(party.getRolename())) {
-            this.tipService.saveTip(receive.getId().toString(), TipConstants.ACTIVITY_LOTTERY);
-        }
+        MoneyLog moneyLog = new MoneyLog();
+        moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
+        moneyLog.setAmount_before(amount_before);
+        moneyLog.setAmount(Arith.add(0, rechargeBonus));
+        moneyLog.setAmount_after(wallet.getMoney());
+
+        moneyLog.setLog("邀请奖励:"+rechargeBonus);
+        moneyLog.setPartyId(seller.getId().toString());
+        moneyLog.setWallettype(Constants.WALLET);
+        moneyLog.setContent_type(Constants.MONEYLOG_CONTNET_INVITATION_REWARDS);
+
+        moneyLogService.save(moneyLog);
+
+//        Party party = this.partyService.cachePartyBy(seller.getId(), false);
+//        if (Constants.SECURITY_ROLE_MEMBER.equals(party.getRolename())) {
+//            this.tipService.saveTip(receive.getId().toString(), TipConstants.ACTIVITY_LOTTERY);
+//        }
     }
 
     public void setPagedQueryDao(PagedQueryDao pagedQueryDao) {

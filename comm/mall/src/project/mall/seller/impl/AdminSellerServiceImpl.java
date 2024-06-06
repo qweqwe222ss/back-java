@@ -19,7 +19,6 @@ import project.log.Log;
 import project.log.LogService;
 import project.log.MoneyLog;
 import project.log.MoneyLogService;
-import project.mall.activity.model.lottery.LotteryReceive;
 import project.mall.seller.AdminSellerService;
 import project.mall.seller.MallLevelService;
 import project.mall.seller.SellerService;
@@ -159,50 +158,6 @@ public class AdminSellerServiceImpl extends HibernateDaoSupport implements Admin
         return page;
     }
 
-//    this.pageNo, this.pageSize, userName, userCode,sellerName,flag,startTime, endTime
-    public Page invitePagedQuery(int pageNo, int pageSize, String userName, String userCode, String sellerName, String state, String startTime,String endTime,String lotteryName) {
-        StringBuffer queryString = new StringBuffer();
-        queryString.append(" SELECT ");
-        queryString.append(" alr.UUID, alr.PARTY_NAME AS partyName, party.USERCODE AS userCode, party.PHONE, party.EMAIL, alr.SELLER_NAME AS sellerName,alr.REMARK, ");
-        queryString.append(" alr.LOTTERY_NAME AS lotteryName, alr.PRIZE_TYPE AS prizeType, alr.PRIZE_AMOUNT AS prizeAmount, alr.PARTY_ID AS partyId, ");
-        queryString.append(" alr.RECOMMEND_NAME AS recommendName, alr.STATE, alr.APPLY_TIME AS applyTime, alr.ISSUE_TIME AS issueTime, alr.CREATE_USER createUser ");
-        queryString.append(" FROM ACTIVITY_LOTTERY_RECEIVE alr ");
-        queryString.append(" LEFT JOIN PAT_PARTY party ON alr.PARTY_ID = party.UUID  ");
-        queryString.append(" WHERE ACTIVITY_TYPE = 0 ");
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        if (!StringUtils.isNullOrEmpty(userName)) {
-            queryString.append("AND alr.PARTY_NAME like:username ");
-            parameters.put("username", "%" + userName + "%");
-        }
-        if (!StringUtils.isNullOrEmpty(userCode)) {
-            queryString.append(" AND party.USERCODE =:usercode ");
-            parameters.put("usercode", userCode);
-        }
-        if (!StringUtils.isNullOrEmpty(sellerName)) {
-            queryString.append(" AND alr.SELLER_NAME LIKE :sellerName ");
-            parameters.put("sellerName", sellerName);
-        }
-        if (!StringUtils.isNullOrEmpty(state)) {
-            queryString.append(" AND alr.STATE =:state ");
-            parameters.put("state", state);
-        }
-        if (!StringUtils.isNullOrEmpty(lotteryName)) {
-            queryString.append(" AND alr.LOTTERY_NAME =:lotteryName ");
-            parameters.put("lotteryName", lotteryName);
-        }
-        if (!StringUtils.isNullOrEmpty(startTime)) {
-            queryString.append(" AND alr.ISSUE_TIME >= :startTime ");
-            parameters.put("startTime", DateUtils.toDate(startTime));
-        }
-        if (!StringUtils.isNullOrEmpty(endTime)) {
-            queryString.append(" AND alr.ISSUE_TIME <= :endTime ");
-            parameters.put("endTime", DateUtils.toDate(endTime));
-        }
-        queryString.append(" ORDER BY alr.APPLY_TIME DESC ");
-        Page page = this.pagedQueryDao.pagedQuerySQL(pageNo, pageSize, queryString.toString(), parameters);
-        return page;
-    }
-
     public Seller findSellerById(String id) {
         return this.getHibernateTemplate().get(Seller.class, id);
     }
@@ -218,51 +173,6 @@ public class AdminSellerServiceImpl extends HibernateDaoSupport implements Admin
         seller.setBaseTraffic(Integer.parseInt(base_traffic));
         seller.setAutoValid(Integer.parseInt(auto_valid));
         this.getHibernateTemplate().update(seller);
-    }
-
-    public void updateDistributeBonuses(String partyId,String activityId, double prizeAmountD,String remark,String username_login){
-        LotteryReceive lotteryReceive = this.getHibernateTemplate().get(LotteryReceive.class, activityId);
-        if (Objects.isNull(lotteryReceive) || lotteryReceive.getState()==1) {
-            throw new BusinessException("该申请不满足发放礼金要求");
-        }
-
-//        更新申请单状态
-        lotteryReceive.setIssueTime(new Date());
-        if (StringUtils.isNotEmpty(remark)) {
-            lotteryReceive.setRemark(remark);
-        }
-        lotteryReceive.setState(1);
-        lotteryReceive.setCreateUser(username_login);
-        this.getHibernateTemplate().saveOrUpdate(lotteryReceive);
-
-        BigDecimal rechargeBonus = lotteryReceive.getPrizeAmount();
-        Wallet wallet = walletService.saveWalletByPartyId(partyId);
-        double amount_before = wallet.getMoney();
-
-        //更新钱包余额
-        wallet.setMoney(Arith.roundDown(Arith.add(wallet.getMoney(), rechargeBonus.doubleValue()), 2));
-        walletService.update(wallet);
-
-        MoneyLog moneyLog = new MoneyLog();
-        moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
-        moneyLog.setAmount_before(amount_before);
-        moneyLog.setAmount(Arith.add(0, rechargeBonus.doubleValue()));
-        moneyLog.setAmount_after(wallet.getMoney());
-        moneyLog.setFreeze(0);
-
-
-        moneyLog.setLog(lotteryReceive.getLotteryName() + "奖励:"+rechargeBonus);
-        moneyLog.setPartyId(partyId);
-        moneyLog.setWallettype(Constants.WALLET);
-
-        if (Objects.equals("首充活动",lotteryReceive.getLotteryName())){
-            moneyLog.setContent_type(Constants.MONEYLOG_CONTNET_FIRST_RECHARGE_BONUS);
-        } else if (Objects.equals("拉人活动",lotteryReceive.getLotteryName())){
-            moneyLog.setContent_type(Constants.MONEYLOG_CONTNET_INVITATION_REWARDS);
-        }
-        moneyLogService.save(moneyLog);
-
-        tipService.deleteTip(lotteryReceive.getId().toString());
     }
 
 

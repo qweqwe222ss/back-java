@@ -38,12 +38,6 @@ import project.blockchain.RechargeBlockchainService;
 import project.blockchain.event.message.RechargeSuccessEvent;
 import project.blockchain.event.model.RechargeInfo;
 import project.log.LogService;
-import project.mall.activity.ActivityTypeEnum;
-import project.mall.activity.model.ActivityLibrary;
-import project.mall.activity.model.lottery.ActivityUserPoints;
-import project.mall.activity.service.ActivityLibraryService;
-import project.mall.activity.service.ActivityUserPointsLogService;
-import project.mall.activity.service.ActivityUserPointsService;
 import project.mall.area.MallAddressAreaService;
 import project.mall.area.model.MallCity;
 import project.mall.area.model.MallCountry;
@@ -128,14 +122,6 @@ public class AdminUserController extends PageActionSupport {
 
 	@Autowired
 	protected RedisHandler redisHandler;
-
-	@Resource
-	private ActivityUserPointsService activityUserPointsService;
-	@Resource
-	private ActivityUserPointsLogService activityUserPointsLogService;
-
-	@Resource
-	private ActivityLibraryService activityLibraryService;
 
 	protected Map<String, Object> session = new HashMap();
 
@@ -1126,71 +1112,6 @@ public class AdminUserController extends PageActionSupport {
 				}
 
 			}
-			ThreadUtils.sleep(500);
-			message = "操作成功";
-		} catch (BusinessException e) {
-			error = e.getMessage();
-		} catch (Throwable t) {
-			logger.error(" error ", t);
-			error = "程序错误";
-		}
-		model.addObject("message", message);
-		model.addObject("error", error);
-		model.setViewName("redirect:/" + "normal/adminUserAction!" + "list.action");
-		return model;
-	}
-
-
-	/**
-	 * 修改账户积分
-	 */
-	@RequestMapping(value = action + "addActivityPoint.action")
-	public ModelAndView addActivityPoint(HttpServletRequest request) {
-		ModelAndView model = new ModelAndView();
-		String message = "";
-		String error = "";
-		String session_token = request.getParameter("session_token");
-		try {
-			String partyId = request.getParameter("partyId");
-			String accPoint = request.getParameter("accPoint");
-			String accType = request.getParameter("accType");
-
-			//  accType = -1 是减积分，1 是加积分  accPoint积分数量
-			logger.info("---> addActivityPoint 请求参数: partyId:{}, accPoint:{}, accType:{}", partyId, accPoint, accType);
-
-			String sessionToken = (String) httpSession.getAttribute("session_token");
-			CsrfTokenUtil.removeTokenFromSession(httpSession);
-			logger.info("---> addActivityPoint token 存储token: sessionToken:{}, 页面传参session_token:{},用户Id:{}", sessionToken,session_token,partyId);
-			if (!CsrfTokenUtil.isTokenValid(sessionToken, session_token)) {
-				// 令牌无效，显示错误消息
-				throw new BusinessException("操作成功，请勿重复点击");
-			}
-
-			synchronized (obj) {
-				int accTypeValue = Integer.parseInt(accType);
-				int accPointValue = Integer.parseInt(accPoint);
-
-				ActivityTypeEnum typeEnum = ActivityTypeEnum.SIMPLE_LOTTERY;
-//				ActivityLibrary activityLibrary = activityLibraryService.findByType(typeEnum.getType());
-				if (StrUtil.isBlank(partyId)) {// || activityLibrary == null
-					throw new BusinessException("参数不正确");
-				}
-
-				// 基于活动 id 给用户加积分
-				ActivityUserPoints activityUserPoints = activityUserPointsService.saveOrGetUserPoints(typeEnum.getType(), "0", partyId);
-				int reducePoints = accPointValue;
-				if (accTypeValue <= 0) {
-					reducePoints = -accPointValue;
-				}
-				if (activityUserPoints.getPoints() + reducePoints < 0) {
-					throw new BusinessException("加减积分后用户剩余积分值不能小于0");
-				}
-
-				activityUserPointsService.updatePoints(activityUserPoints.getId().toString(), reducePoints);
-				// 记录加减积分历史记录
-				activityUserPointsLogService.saveLog(partyId, reducePoints, "system", "addPoints", "0");
-			}
-
 			ThreadUtils.sleep(500);
 			message = "操作成功";
 		} catch (BusinessException e) {

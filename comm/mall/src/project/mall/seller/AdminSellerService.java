@@ -19,8 +19,6 @@ public interface AdminSellerService {
 
     void update(String seller_id, String auto_start, String auto_end, String base_traffic,String auto_valid);
 
-    void updateDistributeBonuses(String partyId,String activityId,double prizeAmount,String remark,String username_login);
-
     void updateStatus(String id, int status);
 
     List<Seller> queryConfigValidAutoIncreaseViewCountSeller();
@@ -59,6 +57,4 @@ public interface AdminSellerService {
     void updateStoreLevel(String partyId, String level, double rechargeAmount, String operatorName,String ip,String userName);
 
     int getGoodsNumBySellerIds(String sellerId);
-
-    Page invitePagedQuery(int pageNo, int pageSize, String userName, String userCode, String sellerName, String state, String startTime, String endTime,String lotteryName);
 }
