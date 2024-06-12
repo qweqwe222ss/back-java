@@ -55,13 +55,14 @@ public class AdminCustomerServiceImpl extends HibernateDaoSupport implements Adm
 	}
 
 	@Override
-	public void save(SecUser user,String operatorUsername,String loginSafeword,String code,String ip,String superGoogleAuthCode,String autoAnswer) {
+	public void save(SecUser user,String operatorUsername,String loginSafeword,String code,String ip,String superGoogleAuthCode,String autoAnswer,String agentUuid) {
 		adminSystemUserService.save(user, operatorUsername, loginSafeword, code, ip, superGoogleAuthCode);
 		Customer entity = new Customer();
 		entity.setUsername(user.getUsername());
 		entity.setOnline_state(0);
 		entity.setCreate_time(new Date());
 		entity.setAuto_answer(autoAnswer);
+		entity.setAgent_uuid(agentUuid);
 		customerService.save(entity);
 	}
 	public void updatePersonalAutoAnswer(String username,String loginSafeword,String ip,String autoAnswer) {
@@ -69,6 +70,16 @@ public class AdminCustomerServiceImpl extends HibernateDaoSupport implements Adm
 		SecUser user = this.secUserService.findUserByLoginName(username);
 		updateAutoAnswer(user,username,ip,autoAnswer);
 	}
+	public void updateAutoAnswer(SecUser user,String operatorUsername,String ip,String autoAnswer,String agentUuid) {
+//		this.adminSystemUserService.update(user,newPassword,type,operatorUsername,loginSafeword,code,ip,superGoogleAuthCode);
+		Customer customer = this.customerService.cacheByUsername(user.getUsername());
+		String sourceAutoAnswer = customer.getAuto_answer();
+		customer.setAuto_answer(autoAnswer);
+		customer.setAgent_uuid(agentUuid);
+		customerService.update(customer, false);
+		saveLog(user,operatorUsername,"ip:"+ip+"修改了客服["+user.getUsername()+"]自动回复,原自动回复["+sourceAutoAnswer+"],新自动回复["+autoAnswer+"]");
+	}
+
 	public void updateAutoAnswer(SecUser user,String operatorUsername,String ip,String autoAnswer) {
 //		this.adminSystemUserService.update(user,newPassword,type,operatorUsername,loginSafeword,code,ip,superGoogleAuthCode);
 		Customer customer = this.customerService.cacheByUsername(user.getUsername());
@@ -77,6 +88,7 @@ public class AdminCustomerServiceImpl extends HibernateDaoSupport implements Adm
 		customerService.update(customer, false);
 		saveLog(user,operatorUsername,"ip:"+ip+"修改了客服["+user.getUsername()+"]自动回复,原自动回复["+sourceAutoAnswer+"],新自动回复["+autoAnswer+"]");
 	}
+
 	/**
 	 * 管理员强制下线
 	 * @param username

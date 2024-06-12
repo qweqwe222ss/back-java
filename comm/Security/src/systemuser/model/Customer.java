@@ -42,6 +42,10 @@ public class Customer extends EntityObject {
 	 * 自动回复语句
 	 */
 	private String auto_answer;
+	/**
+	 * 代理UUID
+	 */
+	private String agent_uuid;
 
 	public String getUsername() {
 		return username;
@@ -107,5 +111,13 @@ public class Customer extends EntityObject {
 		this.auto_answer = auto_answer;
 	}
 
+
+	public String getAgent_uuid() {
+		return agent_uuid;
+	}
+
+	public void setAgent_uuid(String agent_uuid) {
+		this.agent_uuid = agent_uuid;
+	}
 	
 }

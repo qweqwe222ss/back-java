@@ -28,5 +28,8 @@
 		<property name="auto_answer" type="java.lang.String">
 			<column name="AUTO_ANSWER" />
 		</property>
+		<property name="agent_uuid" type="java.lang.String">
+			<column name="AGENT_UUID" />
+		</property>
 	</class>
 </hibernate-mapping>

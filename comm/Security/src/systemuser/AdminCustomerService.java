@@ -8,7 +8,7 @@ public interface AdminCustomerService {
 	Page pagedQuery(int pageNo, int pageSize, String usernamePara);
 
 	void save(SecUser user, String operatorUsername, String loginSafeword, String code, String ip,
-			String superGoogleAuthCode,String autoAnswer);
+			String superGoogleAuthCode,String autoAnswer,String agentUuid);
 	/**
 	 * 下线
 	 * @param username
@@ -29,7 +29,7 @@ public interface AdminCustomerService {
 	 */
 	public void forceOffline(String username,String operatorUsername,String loginSafeword,String ip);
 	
-	public void updateAutoAnswer(SecUser user,String operatorUsername,String ip,String autoAnswer);
+	public void updateAutoAnswer(SecUser user,String operatorUsername,String ip,String autoAnswer,String agentUuid);
 	/**
 	 * 个人中心修改自动回复
 	 * @param username

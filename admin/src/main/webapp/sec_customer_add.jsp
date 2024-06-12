@@ -124,6 +124,20 @@
 				                        </select>
 									</div>
 								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label form-label">所属代理</label>
+									<div class="col-sm-2">
+										<select id="agent_uuid" name="agent_uuid" class="form-control">
+				                           <option value="" >请选择</option>
+											<c:forEach items="${adminAgent.getElements()}" var="item" varStatus="stat">
+												<option value="${item.id}" <c:if test="${item.id == agent_uuid}">selected="true"</c:if>>
+														${item.username}
+												</option>
+											</c:forEach>
+				                        </select>
+									</div>
+								</div>
 								
 								<div class="form-group">
 									<label class="col-sm-2 control-label form-label">自动回复</label>
