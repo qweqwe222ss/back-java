@@ -42,10 +42,11 @@ public class Customer extends EntityObject {
 	 * 自动回复语句
 	 */
 	private String auto_answer;
+
 	/**
-	 * 代理UUID
+	 * 代理PARTY_ID
 	 */
-	private String agent_uuid;
+	private String agent_party_id;
 
 	public String getUsername() {
 		return username;
@@ -112,12 +113,11 @@ public class Customer extends EntityObject {
 	}
 
 
-	public String getAgent_uuid() {
-		return agent_uuid;
+	public String getAgent_party_id() {
+		return agent_party_id;
 	}
 
-	public void setAgent_uuid(String agent_uuid) {
-		this.agent_uuid = agent_uuid;
+	public void setAgent_party_id(String agent_party_id) {
+		this.agent_party_id = agent_party_id;
 	}
-	
 }

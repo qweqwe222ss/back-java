@@ -1,10 +1,10 @@
-package project.web.admin.service.user;
+package project.user;
 
 import java.io.Serializable;
 import java.util.List;
 
 import kernel.web.Page;
-import project.user.Agent;
+import security.AgentNodes;
 
 
 public interface AdminAgentService {

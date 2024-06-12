@@ -1,21 +1,16 @@
-package project.web.admin.impl.user;
+package project.user.internal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.security.providers.encoding.PasswordEncoder;
 
 import kernel.exception.BusinessException;
-import kernel.util.Arith;
-import kernel.util.DateUtils;
 import kernel.util.StringUtils;
 import kernel.web.Page;
 import kernel.web.PagedQueryDao;
@@ -28,11 +23,10 @@ import project.syspara.SysparaService;
 import project.syspara.Syspara;
 import project.user.Agent;
 import project.user.QRGenerateService;
-import project.user.UserData;
 import project.wallet.Wallet;
 import project.wallet.WalletService;
-import project.web.admin.service.user.AdminAgentService;
-import project.web.admin.service.user.AgentNodes;
+import project.user.AdminAgentService;
+import security.AgentNodes;
 import security.Role;
 import security.RoleService;
 import security.SecUser;
@@ -56,7 +50,7 @@ public class AdminAgentServiceImpl extends HibernateDaoSupport implements AdminA
 	public Page pagedQuery(int pageNo, int pageSize, String name_para, String checkedPartyId) {
 
 		StringBuffer queryString = new StringBuffer(
-				"SELECT agent.UUID id,party.NAME name,party.USERNAME username,party.USERCODE usercode,party.ROLENAME rolename,party.LOGINAUTHORITY login_authority,party.USERCODE usercode,party.REMARKS remarks,party_parent.NAME name_parent,party_parent.USERNAME username_parent ");
+				"SELECT agent.UUID id,party.NAME name,party.USERNAME username,party.USERCODE usercode,party.ROLENAME rolename,party.LOGINAUTHORITY login_authority,party.USERCODE usercode,party.REMARKS remarks,party_parent.NAME name_parent,party_parent.USERNAME username_parent,agent.PARTY_ID party_id ");
 		queryString.append(
 				" FROM T_AGENT agent LEFT JOIN PAT_PARTY party ON agent.PARTY_ID = party.UUID  LEFT JOIN PAT_PARTY party_parent ON agent.PARENT_PARTY_ID = party_parent.UUID  WHERE 1 = 1 ");
 

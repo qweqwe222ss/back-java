@@ -33,7 +33,7 @@ import project.syspara.SysParaCode;
 import project.syspara.SysparaService;
 import project.user.UserDataService;
 import project.web.admin.service.report.AdminUserAllStatisticsService;
-import project.web.admin.service.user.AdminAgentService;
+import project.user.AdminAgentService;
 
 /**
  * 交易所_用户收益报表

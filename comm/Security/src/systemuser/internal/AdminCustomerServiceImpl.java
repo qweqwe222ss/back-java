@@ -35,10 +35,12 @@ public class AdminCustomerServiceImpl extends HibernateDaoSupport implements Adm
 	@Override
 	public Page pagedQuery(int pageNo,int pageSize ,String usernamePara) {
 		StringBuffer queryString = new StringBuffer();
-		queryString.append("SELECT customer.UUID id,customer.USERNAME username,customer.ONLINE_STATE online_state,customer.LAST_CUSTOMER_TIME last_customer_time,customer.LAST_ONLINE_TIME last_online_time, ");
-		queryString.append("user.GOOGLE_AUTH_BIND google_auth_bind,user.REMARKS remarks,user.ENABLED enabled ");
+		queryString.append("SELECT customer.UUID id,customer.USERNAME username,customer.ONLINE_STATE online_state,customer.LAST_CUSTOMER_TIME last_customer_time,customer.LAST_ONLINE_TIME last_online_time,customer.AGENT_PARTY_ID agent_party_id, ");
+		queryString.append("user.GOOGLE_AUTH_BIND google_auth_bind,user.REMARKS remarks,user.ENABLED enabled, ");
+		queryString.append("agent_party.USERNAME age_username ");
 		queryString.append("FROM T_CUSTOMER customer ");
 		queryString.append("LEFT JOIN SCT_USER user ON user.USERNAME=customer.USERNAME ");
+		queryString.append("LEFT JOIN PAT_PARTY agent_party ON customer.AGENT_PARTY_ID = agent_party.UUID ");
 		queryString.append("WHERE 1=1 ");
 //		queryString.append("AND (partyId is null OR partyId='') ");
 		Map<String,Object> parameters = new HashMap<String,Object>();
@@ -62,7 +64,7 @@ public class AdminCustomerServiceImpl extends HibernateDaoSupport implements Adm
 		entity.setOnline_state(0);
 		entity.setCreate_time(new Date());
 		entity.setAuto_answer(autoAnswer);
-		entity.setAgent_uuid(agentUuid);
+		entity.setAgent_party_id(agentUuid);
 		customerService.save(entity);
 	}
 	public void updatePersonalAutoAnswer(String username,String loginSafeword,String ip,String autoAnswer) {
@@ -75,7 +77,7 @@ public class AdminCustomerServiceImpl extends HibernateDaoSupport implements Adm
 		Customer customer = this.customerService.cacheByUsername(user.getUsername());
 		String sourceAutoAnswer = customer.getAuto_answer();
 		customer.setAuto_answer(autoAnswer);
-		customer.setAgent_uuid(agentUuid);
+		customer.setAgent_party_id(agentUuid);
 		customerService.update(customer, false);
 		saveLog(user,operatorUsername,"ip:"+ip+"修改了客服["+user.getUsername()+"]自动回复,原自动回复["+sourceAutoAnswer+"],新自动回复["+autoAnswer+"]");
 	}

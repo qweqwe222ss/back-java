@@ -90,6 +90,7 @@
 										<td>最后上线时间</td>
 										<td>最后分配时间</td>
 										<td>谷歌验证器</td>
+										<td>所属代理</td>
 										<td>登录权限</td>
 										<td>备注</td>
 										<td style="width: 130px;"></td>
@@ -127,6 +128,7 @@
 													</c:otherwise>
 												</c:choose>
 											</td>
+											<td>${item.age_username}</td>
 											<td>
 												<c:choose>
 													<c:when test="${item.enabled == 'Y'}">

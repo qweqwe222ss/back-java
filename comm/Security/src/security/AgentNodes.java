@@ -1,4 +1,4 @@
-package project.web.admin.service.user;
+package security;
 
 import java.io.Serializable;
 import java.util.List;

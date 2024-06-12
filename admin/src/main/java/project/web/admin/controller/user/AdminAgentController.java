@@ -26,7 +26,7 @@ import project.log.LogService;
 import project.party.PartyService;
 import project.party.model.Party;
 import project.user.Agent;
-import project.web.admin.service.user.AdminAgentService;
+import project.user.AdminAgentService;
 import security.SecUser;
 import security.internal.SecUserService;
 

@@ -17,7 +17,7 @@ import kernel.exception.BusinessException;
 import kernel.util.StringUtils;
 import kernel.web.PageActionSupport;
 import project.Constants;
-import project.web.admin.service.user.AdminAgentService;
+import project.user.AdminAgentService;
 import security.Role;
 import security.RoleService;
 import security.SecUser;
@@ -134,7 +134,7 @@ public class AdminCustomerController extends PageActionSupport {
 		String login_safeword = request.getParameter("login_safeword");
 		String email_code = request.getParameter("email_code");
 		String super_google_auth_code = request.getParameter("super_google_auth_code");
-		String agent_uuid = request.getParameter("agent_uuid");
+		String agent_party_id = request.getParameter("agent_party_id");
 
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -172,7 +172,7 @@ public class AdminCustomerController extends PageActionSupport {
 
 			// 补充设值
 			this.adminCustomerService.save(secUser, this.getUsername_login(), login_safeword, email_code, this.getIp(),
-					super_google_auth_code, auto_answer, agent_uuid);
+					super_google_auth_code, auto_answer, agent_party_id);
 
 		} catch (BusinessException e) {
 			modelAndView.addObject("error", e.getMessage());
@@ -182,7 +182,7 @@ public class AdminCustomerController extends PageActionSupport {
 			modelAndView.addObject("safe_password", safe_password);
 			modelAndView.addObject("auto_answer", auto_answer);
 			modelAndView.addObject("enabled", enabled);			
-			modelAndView.addObject("agent_uuid", agent_uuid);
+			modelAndView.addObject("agent_party_id", agent_party_id);
 			modelAndView.setViewName("sec_customer_add");
 			return modelAndView;
 		} catch (Throwable t) {
@@ -194,7 +194,7 @@ public class AdminCustomerController extends PageActionSupport {
 			modelAndView.addObject("safe_password", safe_password);
 			modelAndView.addObject("auto_answer", auto_answer);
 			modelAndView.addObject("enabled", enabled);
-			modelAndView.addObject("agent_uuid", agent_uuid);
+			modelAndView.addObject("agent_party_id", agent_party_id);
 			modelAndView.setViewName("sec_customer_add");
 			return modelAndView;
 		}
@@ -236,7 +236,7 @@ public class AdminCustomerController extends PageActionSupport {
 			modelAndView.addObject("username", secUser.getUsername());
 			modelAndView.addObject("enabled", secUser.getEnabled());
 			modelAndView.addObject("remarks", secUser.getRemarks());
-			modelAndView.addObject("agent_uuid", customer.getAgent_uuid());
+			modelAndView.addObject("agent_party_id", customer.getAgent_party_id());
 			modelAndView.addObject("auto_answer", customer.getAuto_answer());
 			
 		} catch (BusinessException e) {
@@ -264,7 +264,7 @@ public class AdminCustomerController extends PageActionSupport {
 		String remarks = request.getParameter("remarks");
 		String login_safeword = request.getParameter("login_safeword");
 		String auto_answer = request.getParameter("auto_answer");
-		String agent_uuid = request.getParameter("agent_uuid");
+		String agent_party_id = request.getParameter("agent_party_id");
 		boolean enabled = Boolean.valueOf(request.getParameter("enabled")).booleanValue();
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -295,7 +295,7 @@ public class AdminCustomerController extends PageActionSupport {
 
 			this.adminSystemUserService.update(secUser, null, null, this.getUsername_login(), login_safeword, null,
 					this.getIp(), null);
-			this.adminCustomerService.updateAutoAnswer(secUser, this.getUsername_login(), this.getIp(), auto_answer, agent_uuid);
+			this.adminCustomerService.updateAutoAnswer(secUser, this.getUsername_login(), this.getIp(), auto_answer, agent_party_id);
 			
 		} catch (BusinessException e) {
 			modelAndView.addObject("error", e.getMessage());

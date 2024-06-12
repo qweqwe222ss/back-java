@@ -21,7 +21,7 @@ import project.party.model.UserRecom;
 import project.party.recom.UserRecomService;
 import project.user.Agent;
 import project.user.UserDataService;
-import project.web.admin.service.user.AdminAgentService;
+import project.user.AdminAgentService;
 import project.web.admin.service.user.AdminUserRecomService;
 import security.SecUser;
 import security.internal.SecUserService;
