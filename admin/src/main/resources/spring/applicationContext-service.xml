@@ -16,7 +16,7 @@
 
 
     <bean id="adminAgentService"
-          class="project.web.admin.impl.user.AdminAgentServiceImpl">
+          class="project.user.internal.AdminAgentServiceImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
         <property name="pagedQueryDao" ref="pagedDao"/>
         <property name="userRecomService" ref="userRecomService"/>
