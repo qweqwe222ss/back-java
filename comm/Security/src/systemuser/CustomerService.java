@@ -23,5 +23,5 @@ public interface CustomerService {
 	 * 
 	 * @return
 	 */
-	public Customer cacheOnlineOne();
+	public Customer cacheOnlineOne(String partyId);
 }

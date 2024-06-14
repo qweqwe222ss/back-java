@@ -177,6 +177,9 @@ public class OnlineChatMessageServiceImpl extends HibernateDaoSupport implements
 		if (!cahce_user.containsKey(partyId)) {// 不存在则添加用户
 			saveCreateByPartyId(partyId);
 		}
+		System.out.println("消息断点 send_receive："+send_receive);
+		System.out.println("消息断点 onlineChatMessage："+onlineChatMessage);
+		System.out.println("消息断点 partyId："+partyId);
 		switch (send_receive) {
 		case "receive":// 客服发送
 			updateUnread(partyId, "user", "write");
@@ -190,8 +193,13 @@ public class OnlineChatMessageServiceImpl extends HibernateDaoSupport implements
 	}
 
 	public String userSendTarget(String partyId, Date sendTime, String targetUsername) {
+		System.out.println("消息断点 partyId2："+partyId);
+		System.out.println("消息断点 sendTime："+sendTime);
+		System.out.println("消息断点 targetUsername："+targetUsername);
 		if (StringUtils.isNotEmpty(targetUsername)) {
 			Customer customer = customerService.cacheByUsername(targetUsername);
+
+			System.out.println("消息断点 customer3："+customer);
 			// 表示该用户被有客服权限的系统用户接手
 			if (customer == null) {
 				return targetUsername;
@@ -202,8 +210,10 @@ public class OnlineChatMessageServiceImpl extends HibernateDaoSupport implements
 			}
 		}
 
+		System.out.println("消息断点 不在线则重新分配");
 		// 不在线则重新分配
-		Customer customer = this.customerService.cacheOnlineOne();
+		Customer customer = this.customerService.cacheOnlineOne(partyId);
+		System.out.println("消息断点 不在线则重新分配customer："+customer);
 		if (null == customer) {
 			return null;
 		}
@@ -214,7 +224,7 @@ public class OnlineChatMessageServiceImpl extends HibernateDaoSupport implements
 			if (update) {// 更新成功，退出
 				break;
 			} else {// 未成功，说明已下线，重新分配新客服
-				customer = this.customerService.cacheOnlineOne();
+				customer = this.customerService.cacheOnlineOne(partyId);
 				if (null == customer) {
 					return null;
 				}
@@ -236,6 +246,7 @@ public class OnlineChatMessageServiceImpl extends HibernateDaoSupport implements
 			saveCreateByPartyId(partyId);
 			messageUser = cahce_user.get(partyId);
 		}
+		System.out.println("消息断点 messageUser1："+messageUser);
 		int removeTipNum = 0;
 		switch (user_customer) {
 		case "user":
@@ -253,9 +264,13 @@ public class OnlineChatMessageServiceImpl extends HibernateDaoSupport implements
 			} else if ("write".equals(type)) {
 				messageUser.setCustomer_unreadmsg(messageUser.getCustomer_unreadmsg() + 1);
 				messageUser.setDelete_status(0);
-				
+
+				System.out.println("消息断点 messageUser2："+messageUser);
+				System.out.println(messageUser);
+
 				final String targetUsername = this.userSendTarget(partyId, new Date(),
 						messageUser.getTarget_username());
+				System.out.println("消息断点 targetUsername："+targetUsername);
 				if (StringUtils.isNotEmpty(targetUsername)
 						&& !targetUsername.equals(messageUser.getTarget_username())) {
 					final Customer customer = customerService.cacheByUsername(targetUsername);

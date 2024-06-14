@@ -10,6 +10,7 @@
 	<bean id="customerService"
 		class="systemuser.internal.CustomerServiceImpl" init-method="init">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="userRecomService" ref="userRecomService" />
 	</bean>
 
 	<dubbo:service
