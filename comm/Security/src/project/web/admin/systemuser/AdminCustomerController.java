@@ -167,7 +167,7 @@ public class AdminCustomerController extends PageActionSupport {
 			secUser.setEnabled(enabled);
 			secUser.setRemarks(remarks);
 			secUser.setPassword(password);
-			secUser.setPartyId("");
+			secUser.setPartyId(agent_party_id);
 			secUser.setSafeword(safe_password);
 
 			// 补充设值
@@ -292,6 +292,7 @@ public class AdminCustomerController extends PageActionSupport {
 			
 			secUser.setEnabled(enabled);
 			secUser.setRemarks(remarks);
+			secUser.setPartyId(agent_party_id);
 
 			this.adminSystemUserService.update(secUser, null, null, this.getUsername_login(), login_safeword, null,
 					this.getIp(), null);
