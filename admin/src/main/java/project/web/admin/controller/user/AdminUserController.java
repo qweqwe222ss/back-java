@@ -1081,17 +1081,16 @@ public class AdminUserController extends PageActionSupport {
 							this.getUsername_login(), reset_type, this.getIp(), coin_type);
 					boolean flag = (boolean) map.get("flag");
 					if (flag) {
-						String orderNo = (String) map.get("orderNo");
-						//管理后台手动加钱生成充值订单 要进行首充奖励 和 邀请拉人奖励
-						rechargeBlockchainService.updateFirstSuccessRecharge(orderNo);
-						rechargeBlockchainService.updateFirstSuccessInviteReward(orderNo);
-
 						// 操作成功后才发布充值成功事件
 						RechargeInfo info = (RechargeInfo) map.get("info");
 						if (info != null) {
 							WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
 							wac.publishEvent(new RechargeSuccessEvent(this, info));
 						}
+						String orderNo = (String) map.get("orderNo");
+						//管理后台手动加钱生成充值订单 要进行首充奖励 和 邀请拉人奖励
+						rechargeBlockchainService.updateFirstSuccessRecharge(orderNo);
+						rechargeBlockchainService.updateFirstSuccessInviteReward(orderNo);
 					}
 					//将修改余额的的减少金额去除
 				}

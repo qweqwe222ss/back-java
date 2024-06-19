@@ -162,9 +162,7 @@
 								<td>所属代理</td>
 								<td>代理Id</td>
 								<td>账户类型</td>
-								<td>钱包余额</td>
-								<td>冻结金额</td>
-								<td>用户积分</td>
+								<td>USDT账户余额</td>
 								<td>手机号</td>
 								<td>邮箱</td>
 								<%--										<td>推荐人</td>--%>
@@ -199,23 +197,7 @@
 											</c:otherwise>
 										</c:choose>
 									</td>
-									<td>
-										<c:if test="${item.frozen_state == 1}">
-											<fmt:formatNumber value="${item.moneyAfterFrozen}" pattern="#0.00" />
-										</c:if>
-										<c:if test="${item.frozen_state == 0}">
-											<fmt:formatNumber value="${item.money}" pattern="#0.00" />
-										</c:if>
-									</td>
-									<td>
-										<c:if test="${item.frozen_state == 1}">
-											<fmt:formatNumber value="${item.money}" pattern="#0.00" />
-										</c:if>
-										<c:if test="${item.frozen_state == 0}">
-											<fmt:formatNumber value="${item.moneyAfterFrozen}" pattern="#0.00" />
-										</c:if>
-									</td>
-									<td>${item.activityPoints}</td>
+									<td><a href="#" onClick="getAllMoney('${item.id}');"><fmt:formatNumber value="${item.money}" pattern="#0.00" /></a></td>
 									<td>${item.phone}</td>
 									<td>${item.email}</td>
 										<%--											<td>${item.username_parent}</td>--%>

@@ -758,14 +758,13 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 
 			Wallet wallet = this.walletService.saveWalletByPartyId(partyId);
 
-			int frozenState = wallet.getFrozenState();
 
 			double amount_before = wallet.getMoney();
 
 			// 账变日志
 			MoneyLog moneyLog = new MoneyLog();
 
-			if (frozenState == 1 && reset_type.equals("recharge")){
+			if ( reset_type.equals("recharge")){
 				amount_before = wallet.getMoneyAfterFrozen();
 				moneyLog.setFreeze(1);
 			}
@@ -781,18 +780,11 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 				throw new BusinessException("资金密码错误");
 			}
 
+
 			//除充值提现 其他都走冻结钱包money
-			if (frozenState == 1 && reset_type.equals("recharge")){
-				amount_before = wallet.getMoneyAfterFrozen();
-				debugLogger.info("---> AdminUserServiceImpl saveResetCreateOrder 发起更新钱包余额的的请求, partyId:{}, amount:{} ...", wallet.getPartyId(), money_revise);
-				this.walletService.update(wallet.getPartyId().toString(), money_revise);
-				debugLogger.info("---> AdminUserServiceImpl saveResetCreateOrder 已提交请求更新钱包余额, partyId:{}, amount:{}", wallet.getPartyId(), money_revise);
-			} else {
-				moneyLog.setFreeze(0);
-				debugLogger.info("---> AdminUserServiceImpl saveResetCreateOrder 发起更新钱包余额的的请求, partyId:{}, amount:{} ...", wallet.getPartyId(), money_revise);
-				this.walletService.updateMoeny(wallet.getPartyId().toString(), money_revise);
-				debugLogger.info("---> AdminUserServiceImpl saveResetCreateOrder 已提交请求更新钱包余额, partyId:{}, amount:{}", wallet.getPartyId(), money_revise);
-			}
+			this.debugLogger.info("---> AdminUserServiceImpl saveResetCreateOrder partyId:{}, amount:{} ...", wallet.getPartyId(), Double.valueOf(money_revise));
+			this.walletService.update(wallet.getPartyId().toString(), money_revise);
+			this.debugLogger.info("---> AdminUserServiceImpl saveResetCreateOrder partyId:{}, amount:{}", wallet.getPartyId(), Double.valueOf(money_revise));
 
 
 			Boolean produceRechargeBlockchain = !"change".equals(reset_type);//赠送彩金不生成充值订单
