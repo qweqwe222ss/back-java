@@ -514,18 +514,10 @@ public class WalletController extends BaseAction {
 		// 向下取整
 		//df2.setRoundingMode(RoundingMode.FLOOR);
 		Wallet wallet = this.walletService.selectOne(partyId);
-		if (null != wallet){
+		if (null != wallet) {
 			double money = wallet.getMoney();
-			double frozenMoney = wallet.getMoneyAfterFrozen();
-			// 账户剩余资金
-			if(wallet.getFrozenState()==0){
-				data.put("money", Arith.round(money,2));
-				data.put("frozenMoney", Arith.round(frozenMoney,2));
-			}else if (wallet.getFrozenState()==1){
-				data.put("money", Arith.round(frozenMoney,2));
-				data.put("frozenMoney", Arith.round(money,2));
-			}
-			data.put("rebate", Arith.round(wallet.getRebate(),2));
+			data.put("money", Double.valueOf(Arith.round(money, 2)));
+			data.put("rebate", Double.valueOf(Arith.round(wallet.getRebate(), 2)));
 		}
 		resultObject.setData(data);
 		return resultObject;

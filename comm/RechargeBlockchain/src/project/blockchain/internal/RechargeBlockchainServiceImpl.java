@@ -506,22 +506,10 @@ public class RechargeBlockchainServiceImpl extends HibernateDaoSupport implement
 		// Wallet wallet = walletService.saveWalletByParaAndUpdate(String.valueOf(recharge.getPartyId()), amount);
 		Wallet wallet = new Wallet();
 		wallet = walletService.saveWalletByPartyId(recharge.getPartyId());
-		int frozenState = wallet.getFrozenState();
-
 
 		double amount_before = wallet.getMoney();
 
-		MoneyLog moneyLog = new MoneyLog();
-
-		if (1 == frozenState){
-			amount_before = wallet.getMoneyAfterFrozen();
-			moneyLog.setFreeze(1);
-		} else if (0 == frozenState){
-			// 2023-7-15 调整，将充值提成记到充值用户身上
-			moneyLog.setFreeze(0);
-		}
-
-		walletService.update(wallet.getPartyId().toString(), amount, 0.0, rechargeCommission);
+		this.walletService.update(wallet.getPartyId().toString(), amount.doubleValue(), 0.0D, rechargeCommission);
 
 		if (rechargeCommission > 0.0) {
 			// 上级推荐人增加充值提成更新
@@ -541,6 +529,7 @@ public class RechargeBlockchainServiceImpl extends HibernateDaoSupport implement
 			}
 		}
 
+		MoneyLog moneyLog = new MoneyLog();
 		/*
 		 * 保存资金日志
 		 */

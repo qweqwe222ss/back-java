@@ -293,13 +293,8 @@ public class CreditServiceImpl extends HibernateDaoSupport implements CreditServ
             double estimatePayment = ((BigDecimal) calculate.get("estimatePayment")).doubleValue();
             Wallet wallet = walletService.saveWalletByPartyId(partyId);
 
-            int frozenState = wallet.getFrozenState();
-
             double amount_before = wallet.getMoney();
 
-            if(frozenState == 1){
-                amount_before = wallet.getMoneyAfterFrozen();
-            }
             if (amount_before < estimatePayment) {
                 throw new BusinessException("余额不足");
             }

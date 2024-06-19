@@ -1161,34 +1161,19 @@ public class GoodsOrdersServiceImpl extends HibernateDaoSupport implements Goods
 
             Wallet wallet = walletService.saveWalletByPartyId(partyId);
 
-            double amount_before = 0D;
-            if (wallet.getFrozenState() == 0) {
-                amount_before = wallet.getMoney();
-            } else {//处于冻结状态时
-                amount_before = wallet.getMoneyAfterFrozen();
-            }
+            double amount_before = wallet.getMoney();
             if (amount_before < prize) {
                 throw new BusinessException("余额不足");
             }
-            if (wallet.getFrozenState() == 0) {
-                wallet.setMoney(Arith.roundDown(Arith.sub(wallet.getMoney(), prize), 2));
-            } else {//处于冻结状态时
-                wallet.setMoneyAfterFrozen(Arith.roundDown(Arith.sub(wallet.getMoneyAfterFrozen(), prize), 2));
-            }
-//            walletService.update(wallet.getPartyId().toString(), Arith.sub(0, prize));
-            walletService.update(wallet);
+
+            wallet.setMoney(Arith.sub(wallet.getMoney(), prize));
+            this.walletService.update(wallet.getPartyId().toString(), Arith.sub(0.0D, prize));
 
             MoneyLog moneyLog = new MoneyLog();
             moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
             moneyLog.setAmount_before(amount_before);
             moneyLog.setAmount(Arith.sub(0, prize));
-            if (wallet.getFrozenState() == 0) {
-                moneyLog.setAmount_after(wallet.getMoney());
-                moneyLog.setFreeze(0);
-            } else {//处于冻结状态时
-                moneyLog.setAmount_after(wallet.getMoneyAfterFrozen());
-                moneyLog.setFreeze(1);
-            }
+            moneyLog.setAmount_after(wallet.getMoney());
             moneyLog.setLog("支付[" + list.size() + "]个订单");
             moneyLog.setPartyId(partyId);
             moneyLog.setWallettype(Constants.WALLET);
@@ -1651,40 +1636,19 @@ public class GoodsOrdersServiceImpl extends HibernateDaoSupport implements Goods
             }
 //            Wallet wallet = walletService.saveWalletByPartyId(partyId); 这里经常出现缓存不一致的问题，改为直接查库
             Wallet wallet = walletService.selectOne(partyId);
-            if (Objects.isNull(wallet)) {
-                throw new BusinessException("余额不足");
-            }
-            double amount_before = 0D;
-            if (wallet.getFrozenState() == 0) {
-                amount_before = wallet.getMoney();
-            } else {//处于冻结状态时
-                amount_before = wallet.getMoneyAfterFrozen();
-            }
-
-            if (amount_before < prize) {
+            double amount_before = wallet.getMoney();
+            if (Objects.isNull(wallet) || amount_before < prize){
                 throw new BusinessException("余额不足");
             }
 
-            if (wallet.getFrozenState() == 0) {
-                wallet.setMoney(Arith.roundDown(Arith.sub(wallet.getMoney(), prize), 2));
-            } else {//处于冻结状态时
-                wallet.setMoneyAfterFrozen(Arith.roundDown(Arith.sub(wallet.getMoneyAfterFrozen(), prize), 2));
-            }
-
-//            walletService.update(wallet.getPartyId().toString(), Arith.sub(0, prize));
-            walletService.update(wallet);
+            wallet.setMoney(Arith.sub(wallet.getMoney(), prize));
+            this.walletService.update(wallet);
 
             MoneyLog moneyLog = new MoneyLog();
             moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
             moneyLog.setAmount_before(amount_before);
             moneyLog.setAmount(Arith.sub(0, prize));
-            if (wallet.getFrozenState() == 0) {
-                moneyLog.setAmount_after(wallet.getMoney());
-                moneyLog.setFreeze(0);
-            } else {//处于冻结状态时
-                moneyLog.setAmount_after(wallet.getMoneyAfterFrozen());
-                moneyLog.setFreeze(1);
-            }
+            moneyLog.setAmount_before(amount_before);
 
             moneyLog.setLog("采购订单[" + orderId + "]");
             moneyLog.setPartyId(partyId);

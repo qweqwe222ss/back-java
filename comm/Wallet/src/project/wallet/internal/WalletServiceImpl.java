@@ -183,20 +183,10 @@ public class WalletServiceImpl extends HibernateDaoSupport implements WalletServ
     @Override
     public void update(String partyId, double amount) {
         Wallet wallet = saveWalletByPartyId(partyId);
-        if (wallet.getFrozenState()==0) {
-            wallet.setMoney(Arith.roundDown(Arith.add(wallet.getMoney(), amount),2));
-        }else {
-            wallet.setMoneyAfterFrozen(Arith.roundDown(Arith.add(wallet.getMoneyAfterFrozen(), amount),2));
-        }
-
-        // 此处不要执行持久化处理，因为 WalletConsumeServer 方法会以异步方式从 redis 中读取 WALLET_QUEUE_UPDATE 资金变更队列中的
-        // 数据来单线程模式执行每笔变更记录，刷新钱包余额。
-        //getHibernateTemplate().save(wallet);
-        //getHibernateTemplate().flush();
-        log.info("----> WalletServiceImpl.update 更新用户:{} 的钱包余额为:{}", partyId, wallet.getMoney());
+        wallet.setMoney(Arith.add(wallet.getMoney(), amount));
+        log.info("----> WalletServiceImpl.update {} {}", partyId, Double.valueOf(wallet.getMoney()));
         getHibernateTemplate().merge(wallet);
         redisHandler.setSync(WalletRedisKeys.WALLET_PARTY_ID + wallet.getPartyId().toString(), wallet);
-//        redisHandler.pushAsyn(WalletRedisKeys.WALLET_QUEUE_UPDATE, new WalletMessage(partyId, amount));
     }
 
     @Override
@@ -229,12 +219,6 @@ public class WalletServiceImpl extends HibernateDaoSupport implements WalletServ
     @Override
     public void update(String partyId, double amount, double rebate, double rechargeCommission) {
         Wallet wallet = saveWalletByPartyId(partyId);
-
-        if(wallet.getFrozenState() == 1){
-            wallet.setMoneyAfterFrozen(Arith.roundDown(Arith.add(wallet.getMoneyAfterFrozen(), amount),2));
-        } else if (wallet.getFrozenState() == 0){
-            wallet.setMoney(Arith.roundDown(Arith.add(wallet.getMoney(), amount),2));
-        }
 
         wallet.setRebate(Arith.add(wallet.getRebate(), rebate));
         wallet.setRechargeCommission(Arith.add(wallet.getRechargeCommission(), rechargeCommission));

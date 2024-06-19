@@ -1025,16 +1025,7 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 
 			Wallet wallet = this.walletService.saveWalletByPartyId(partyId);
 
-			int frozenState = wallet.getFrozenState();
 			double amount_before = wallet.getMoney();
-
-			if (frozenState == 1 && reset_type.equals("withdraw")){
-				amount_before = wallet.getMoneyAfterFrozen();
-			}
-
-			if (wallet.getFrozenState() == 1 && reset_type.equals("withdraw")){
-				 amount_before = wallet.getMoneyAfterFrozen();
-			}
 			if (amount_before < money_revise) {
 				throw new BusinessException("余额不足");
 			}
@@ -1050,15 +1041,7 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 				throw new BusinessException("资金密码错误");
 			}
 
-			// 账变日志
-			MoneyLog moneyLog = new MoneyLog();
-
-			if (frozenState == 1 && reset_type.equals("withdraw")){
-				moneyLog.setFreeze(1);
-				this.walletService.update(wallet.getPartyId().toString(), money_revise);
-			} else {
-				this.walletService.updateMoeny(wallet.getPartyId().toString(), money_revise);
-			}
+			this.walletService.update(wallet.getPartyId().toString(), money_revise);
 
 			Boolean produceWithdraw = !"changesub".equals(reset_type);
 			String orderNo = DateUtil.getToday("yyMMddHHmmss") + RandomUtil.getRandomNum(8);
@@ -1079,7 +1062,7 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 				withdraw.setSucceeded(1);
 				this.getHibernateTemplate().save(withdraw);
 			}
-
+			MoneyLog moneyLog = new MoneyLog();
 			moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
 			moneyLog.setAmount_before(amount_before);
 			moneyLog.setAmount(money_revise);

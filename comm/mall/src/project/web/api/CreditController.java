@@ -75,10 +75,6 @@ public class CreditController extends PageActionSupport {
             if (credits.size() > 0) {//有正在使用的贷款，不展示申请贷款页面
                 resultObject.setData("false");
             }
-            Wallet wallet = walletService.saveWalletByPartyId(partyId);
-            if (wallet.getFrozenState() == 1){//资金冻结后不让借贷
-                resultObject.setData("false");
-            }
         } catch (Exception e) {
             resultObject.setCode("1");
             resultObject.setMsg("程序错误");

@@ -107,10 +107,6 @@ public class WithdrawServiceImpl extends HibernateDaoSupport implements Withdraw
 
 		double money = wallet.getMoney();
 
-		if (wallet.getFrozenState() == 1){
-			money = wallet.getMoneyAfterFrozen();
-		}
-
 		if (money < withdraw.getVolume()) {
 			throw new BusinessException(1, "余额不足");
 		}
@@ -190,12 +186,7 @@ public class WithdrawServiceImpl extends HibernateDaoSupport implements Withdraw
 
 		double amount_before = wallet.getMoney();
 
-		if (wallet.getFrozenState() == 1){
-			amount_before = wallet.getMoneyAfterFrozen();
-			wallet.setMoneyAfterFrozen(Arith.roundDown(Arith.sub(wallet.getMoneyAfterFrozen(), withdraw.getVolume()),2));
-		} else {
-			wallet.setMoney(Arith.roundDown(Arith.sub(wallet.getMoney(), withdraw.getVolume()),2));
-		}
+		wallet.setMoney(Arith.sub(wallet.getMoney(), withdraw.getVolume()));
 		walletService.update(wallet);
 
 		this.getHibernateTemplate().save(withdraw);
@@ -209,12 +200,7 @@ public class WithdrawServiceImpl extends HibernateDaoSupport implements Withdraw
 		moneyLog.setAmount_before(amount_before);
 		moneyLog.setAmount(Arith.sub(0, withdraw.getVolume()));
 
-		if (wallet.getFrozenState() == 1){
-			moneyLog.setAmount_after(wallet.getMoneyAfterFrozen());
-			moneyLog.setFreeze(1);
-		} else {
-			moneyLog.setAmount_after(wallet.getMoney());
-		}
+		moneyLog.setAmount_after(wallet.getMoney());
 
 		moneyLog.setLog("提现订单[" + withdraw.getOrder_no() + "]");
 		// moneyLog.setExtra(withdraw.getOrder_no());

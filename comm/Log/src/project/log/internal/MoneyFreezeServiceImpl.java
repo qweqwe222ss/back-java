@@ -66,7 +66,6 @@ public class MoneyFreezeServiceImpl extends HibernateDaoSupport implements Money
 
 		Wallet wallet = this.walletService.saveWalletByPartyId(sellerId);
 		double amount_before = wallet.getMoney();
-		double moneyAfterFrozenBefore = wallet.getMoneyAfterFrozen();
 		if (freezeAmout == 0.0D) {
 			// 提交 0 意味着全部冻结
 			freezeAmout = amount_before;
@@ -79,11 +78,7 @@ public class MoneyFreezeServiceImpl extends HibernateDaoSupport implements Money
 		}
 
 		// 更新商家资金冻结字段 状态改变后 moneyAfterFrozen为用户钱包金额
-		wallet.setFrozenState(1);
-		wallet.setMoneyAfterFrozen(Arith.sub(amount_before,freezeAmout));
-		wallet.setMoney(freezeAmout);
-		walletService.update(wallet);
-
+		this.walletService.update(sellerId, -freezeAmout);
 		this.sellerService.updateFreezeState(sellerId, 1);
 
 		MoneyLog moneylog = new MoneyLog();
@@ -112,21 +107,8 @@ public class MoneyFreezeServiceImpl extends HibernateDaoSupport implements Money
 		freeze.setOperator(operator);
 		this.save(freeze);
 
-
-		MoneyLog moneylog1 = new MoneyLog();
-		moneylog1.setCategory(Constants.MONEYLOG_CATEGORY_CONTRACT);
-		moneylog1.setFreeze(1);
-		moneylog1.setAmount_before(moneyAfterFrozenBefore);
-		moneylog1.setAmount(Arith.sub(amount_before,freezeAmout));
-		moneylog1.setAmount_after(wallet.getMoneyAfterFrozen());
-		moneylog1.setLog("冻结商家资金");
-		moneylog1.setPartyId(sellerId);
-		moneylog1.setWallettype(Constants.WALLET);
-		moneylog1.setContent_type(Constants.MONEYLOG_FREEZE_SELLER);
-		moneyLogService.save(moneylog1);
-//
-//		// 优化定时任务的处理速度，方便轮询定时解冻的记录
-//		redisHandler.zadd(MallLogRedisKeys.SELLER_MONEY_FREEZE, endTime.getTime(), freeze.getId().toString());
+		// 优化定时任务的处理速度，方便轮询定时解冻的记录
+		redisHandler.zadd(MallLogRedisKeys.SELLER_MONEY_FREEZE, endTime.getTime(), freeze.getId().toString());
 
 		return freeze;
 	}
@@ -158,11 +140,8 @@ public class MoneyFreezeServiceImpl extends HibernateDaoSupport implements Money
 		Wallet wallet = this.walletService.saveWalletByPartyId(freezeEntity.getPartyId());
 		double amount_before = wallet.getMoney();
 		double freezeAmout = freezeEntity.getAmount();
-		// 更新商家资金余额，余额给加回去
-		wallet.setMoney(Arith.roundDown(Arith.add(wallet.getMoney(),freezeAmout),2));
-		wallet.setFrozenState(0);
-		walletService.update(wallet);
 
+		this.walletService.update(freezeEntity.getPartyId().toString(), freezeAmout);
 		this.sellerService.updateFreezeState(freezeEntity.getPartyId().toString(), 0);
 
 		MoneyLog moneylog = new MoneyLog();
@@ -200,9 +179,6 @@ public class MoneyFreezeServiceImpl extends HibernateDaoSupport implements Money
 			throw new RuntimeException("不存在的冻结记录");
 		}
 
-		if (wallet.getFrozenState() != 1){
-			throw new RuntimeException("用户不处于冻结状态");
-		}
 		if (freezeEntity.getStatus() == 0) {
 			return 0;
 		}
@@ -221,11 +197,8 @@ public class MoneyFreezeServiceImpl extends HibernateDaoSupport implements Money
 		double money = wallet.getMoney();
 
 		//更新商家资金余额，余额给加回去 钱包冻结状态解除， moneyAfterFrozen值清零
-		wallet.setFrozenState(0);
-		wallet.setMoney(Arith.roundDown(Arith.add(wallet.getMoney(),wallet.getMoneyAfterFrozen()),2));
-		wallet.setMoneyAfterFrozen(0);
-		this.walletService.update(wallet);
-
+		double freezeAmout = freezeEntity.getAmount().doubleValue();
+		this.walletService.update(freezeEntity.getPartyId().toString(), freezeAmout);
 		this.sellerService.updateFreezeState(freezeEntity.getPartyId().toString(), 0);
 
 		MoneyLog moneylog = new MoneyLog();

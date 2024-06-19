@@ -177,7 +177,6 @@
 								<td>商品数量</td>
 								<td>店铺关注人数</td>
 								<td>钱包余额</td>
-								<td>冻结余额</td>
 								<td>推荐人</td>
 								<td>推荐店铺</td>
 								<td>是否冻结</td>
@@ -216,23 +215,7 @@
 									</td>
 									<td><a href="#" onClick="getGoodsNumBySellerIds('${item.sellerId}')">点击查看</a></td>
 									<td>${item.reals + item.fake}</td>
-
-									<td>
-										<c:if test="${item.frozenState == 1}">
-											<fmt:formatNumber value="${item.moneyAfterFrozen}" pattern="#0.00" />
-										</c:if>
-										<c:if test="${item.frozenState == 0}">
-											<fmt:formatNumber value="${item.money}" pattern="#0.00" />
-										</c:if>
-									</td>
-									<td>
-										<c:if test="${item.frozenState == 1}">
-										 <fmt:formatNumber value="${item.money}" pattern="#0.00" />
-										</c:if>
-										<c:if test="${item.frozenState == 0}">
-										 <fmt:formatNumber value="${item.moneyAfterFrozen}" pattern="#0.00" />
-										</c:if>
-									</td>
+									<td><fmt:formatNumber value="${item.money}" pattern="#0.00" /></td>
 									<td>${item.username_parent}</td>
 									<td>
 										<c:choose>
@@ -246,7 +229,7 @@
 									</td>
 									<td>
 										<c:choose>
-											<c:when test="${item.frozenState == '1'}">
+											<c:when test="${item.freeze == '1'}">
 												<span class="right label label-danger">已冻结</span>
 											</c:when>
 											<c:otherwise>
@@ -290,7 +273,7 @@
 														</c:otherwise>
 													</c:choose>
 													<c:choose>
-														<c:when test="${item.frozenState == '1'}">
+														<c:when test="${item.freeze == '1'}">
 															<li><a href="javascript:unFreezeMoney('${item.sellerId}')">解冻店铺</a></li>
 														</c:when>
 														<c:otherwise>
@@ -591,33 +574,31 @@
 									   class="form-control" value="${money}"  readonly="true">
 							</div>
 						</div>
-<%--						<c:if test="${platformName != 'TikTokWholesale'}">--%>
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true"></button>
-								<h4 class="modal-title">冻结金额 <span style="color: red;">（输入0意味金额被全部冻结）</span></h4>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true"></button>
+							<h4 class="modal-title">冻结金额</h4>
+						</div>
 
+						<div class="modal-body">
+							<div class="">
+								<input id="amount" name="amount"
+									   class="form-control" value="${amount}" onkeyup="this.value=this.value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3').replace(/^\./g, '')">
 							</div>
+						</div>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true"></button>
+							<h4 class="modal-title">冻结天数</h4>
+						</div>
 
-							<div class="modal-body">
-								<div class="">
-									<input id="amount" name="amount"
-										   class="form-control" value="${amount}" onkeyup="this.value=this.value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3').replace(/^\./g, '')">
-								</div>
+						<div class="modal-body">
+							<div class="">
+								<input id="freezeDays" name="freezeDays"
+									   class="form-control" value="${freezeDays}" oninput="value=value.replace(/[^\d]/g,'')">
 							</div>
-<%--							<div class="modal-header">--%>
-<%--								<button type="button" class="close" data-dismiss="modal"--%>
-<%--										aria-hidden="true"></button>--%>
-<%--								<h4 class="modal-title">冻结天数</h4>--%>
-<%--							</div>--%>
+						</div>
 
-<%--							<div class="modal-body">--%>
-<%--								<div class="">--%>
-<%--									<input id="freezeDays" name="freezeDays"--%>
-<%--										   class="form-control" value="${freezeDays}" oninput="value=value.replace(/[^\d]/g,'')">--%>
-<%--								</div>--%>
-<%--							</div>--%>
-<%--						</c:if>--%>
 
 						<div class="modal-footer" style="margin-top: 0;">
 							<button type="button" class="btn " data-dismiss="modal">关闭</button>
@@ -908,14 +889,14 @@
 			<div class="modal-body">
 				<div class="">
 					访问人数<input id="viewsNum" type="text" name="viewsNum"
-								   class="form-control" readonly="readonly" />
+							   class="form-control" readonly="readonly" />
 				</div>
 			</div>
 
 			<div class="modal-body">
 				<div class="">
 					待到账金额<input id="willIncome" type="text" name="willIncome"
-									 class="form-control" readonly="readonly" />
+								class="form-control" readonly="readonly" />
 				</div>
 			</div>
 
@@ -938,7 +919,7 @@
 			<div class="modal-body">
 				<div class="">
 					商品数量<input id="goodsNum" type="text" name="goodsNum"
-								   class="form-control" readonly="readonly" />
+							   class="form-control" readonly="readonly" />
 				</div>
 			</div>
 
@@ -995,18 +976,9 @@
 
 
 	function freezeSellerMoney(sellerId,money,sellerName){
-
-		if (/^[+-]?\d+(\.\d+)?[eE][+-]?\d+$/.test(money)) {
-			// 如果是科学计数法，将其转换为常规数字
-			money = parseFloat(money).toString();
-		}
-
-
 		$("#seller_Id4").val(sellerId);
 		$("#money").val(money);
 		$("#sellerNames").val(sellerName);
-		$("#amount").val(money);
-		$("#freezeDays").val(1);
 		$('#modal_set4').modal("show");
 	}
 

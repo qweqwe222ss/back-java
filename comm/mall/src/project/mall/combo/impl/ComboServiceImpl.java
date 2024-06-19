@@ -87,23 +87,14 @@ public class ComboServiceImpl extends HibernateDaoSupport implements ComboServic
             Wallet wallet = walletService.saveWalletByPartyId(partyId);
 
 
-            double amount_before = wallet.getFrozenState()==0?wallet.getMoney():wallet.getMoneyAfterFrozen();
-            MoneyLog moneyLog = new MoneyLog();
+            double amount_before = wallet.getMoney();
             if (amount_before < prize) {
                 throw new BusinessException("余额不足");
             }
-            // 不够原子，TODO
-            if (wallet.getFrozenState()==0) {
-                wallet.setMoney(Arith.roundDown(Arith.sub(wallet.getMoney(), prize),2));
-                moneyLog.setAmount_after(wallet.getMoney());
-                moneyLog.setFreeze(0);
-            }else {//处于冻结状态时
-                wallet.setMoneyAfterFrozen(Arith.roundDown(Arith.sub(wallet.getMoneyAfterFrozen(), prize),2));
-                moneyLog.setAmount_after(wallet.getMoneyAfterFrozen());
-                moneyLog.setFreeze(1);
-            }
-            walletService.update(wallet);
+            wallet.setMoney(Arith.sub(wallet.getMoney(), prize));
+            this.walletService.update(wallet.getPartyId().toString(), Arith.sub(0.0D, prize));
 
+            MoneyLog moneyLog = new MoneyLog();
             moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
             moneyLog.setAmount_before(amount_before);
             moneyLog.setAmount(Arith.sub(0, prize));
