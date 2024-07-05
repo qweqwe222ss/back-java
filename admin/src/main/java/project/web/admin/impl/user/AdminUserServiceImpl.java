@@ -761,14 +761,6 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 
 			double amount_before = wallet.getMoney();
 
-			// 账变日志
-			MoneyLog moneyLog = new MoneyLog();
-
-			if ( reset_type.equals("recharge")){
-				amount_before = wallet.getMoneyAfterFrozen();
-				moneyLog.setFreeze(1);
-			}
-
 			if (Arith.add(money_revise, amount_before) < 0.0D) {
 				throw new BusinessException("操作失败！修正后账户余额小于0。");
 			}
@@ -810,6 +802,9 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 				result.put("orderNo",rechargeOrderNo);
 			}
 
+
+			// 账变日志
+			MoneyLog moneyLog = new MoneyLog();
 			moneyLog.setCategory(Constants.MONEYLOG_CATEGORY_COIN);
 			moneyLog.setAmount_before(amount_before);
 			moneyLog.setAmount(money_revise);
@@ -845,7 +840,7 @@ public class AdminUserServiceImpl extends HibernateDaoSupport implements AdminUs
 				result.put("info",info);
 			}
 
-			// 操作日志			
+			// 操作日志
 			Log log = new Log();
 			log.setCategory(Constants.LOG_CATEGORY_OPERATION);
 			log.setUsername(party.getUsername());
